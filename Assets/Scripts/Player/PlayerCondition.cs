@@ -25,12 +25,18 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        if (hunger.curValue <= 0f)
+ feat/NPC/JKH
+        if(hunger.curValue < 0f)
+
+ dev
         {
             health.Subject(noHungerHealthDecay * Time.deltaTime);
         }
 
-        if (health.curValue <= 0f)
+ feat/NPC/JKH
+        if(health.curValue < 0f)
+
+dev
         {
             Die();
         }
