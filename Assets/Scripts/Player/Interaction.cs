@@ -11,6 +11,7 @@ public class Interaction : MonoBehaviour
     public float maxCheckDistance;
     public LayerMask layerMask;
 
+
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
 
@@ -57,7 +58,7 @@ public class Interaction : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
             curInteractable.OnInteract();
             curInteractGameObject = null;
