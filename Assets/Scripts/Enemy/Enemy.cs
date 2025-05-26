@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet") //화살로 바꾸기
         {
             Destroy(other.gameObject);
             Destroy(transform.parent.gameObject, t: 2f); //부모씬 2초후 파괴
@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    void Die() //사망 애니메이션 추가예정
     {
         for (int i = 0; i < transform.childCount; i++) //자식 가지고오기
         {
