@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [Header("Player Settings")]
     public Transform player;
     public float detectDistance = 5f;      // (현재는 안 쓰지만 유지)
-    public float attackDistance = 1.5f;
+    public float attackDistance = 2f;
 
     [Header("Attack Settings")]
     public float attackCooldown = 1f;
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
         targetDirection.y = 0;
 
         // 이동 애니메이션 재생
-        animator.SetFloat("Speed", moveSpeed);  //에너미 스피드 조절
+        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));  //에너미 스피드 조절
 
         // 회전만 스크립트에서 처리
         if (targetDirection != Vector3.zero)
@@ -160,19 +160,41 @@ public class Enemy : MonoBehaviour
     //{
     //    if (other.CompareTag("Bullet") && !isDead)
     //    {
-    //        Destroy(other.gameObject);
-    //        Die();
+    //        Destroy(other.gameObject);  // 화살 제거
+    //        Die();  //에너미 사망 처리
     //    }
     //}
 
-    void Die()
+    public void Die()
     {
         isDead = true;
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // 적 삭제 (3초 후)
-        Destroy(gameObject, 3f);
+        // 콜라이더 제거 , 사망시 다른 에너미랑 충돌처리 없앰
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+
         Debug.Log("적 사망");
+
+        // 3초 뒤 제거
+        Destroy(gameObject, 3f);
+    }
+
+    void OnEnable()
+    {
+        isDead = false;
+        isAttacking = false;
+        attackTimer = 0f;
+
+        animator.ResetTrigger("IsDie");
+        animator.ResetTrigger("IsAttack");
+
+        // 걷기 상태로 애니메이션 세팅
+        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));
+
+        ChangeState(State.Detect);
     }
 }
