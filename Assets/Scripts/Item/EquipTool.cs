@@ -47,9 +47,12 @@ public class EquipTool : Equip
 
         if(Physics.Raycast(ray, out hit, attackDistance))
         {
-            if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
+            if (hit.collider.TryGetComponent(out Resource resource))
             {
-                resource.Gather(hit.point, hit.normal);
+                if (doesGatherResources)
+                {
+                    resource.Gather(hit.point, hit.normal);
+                }
             }
         }
     }
