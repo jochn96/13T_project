@@ -28,7 +28,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
  
         if(hunger.curValue < 0f)
 
-
+ 
         {
             health.Subject(noHungerHealthDecay * Time.deltaTime);
         }
