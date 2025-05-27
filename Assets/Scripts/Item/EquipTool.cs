@@ -28,14 +28,11 @@ public class EquipTool : Equip
     public override void OnAttackInput()
     {
         if (!attacking)
-        {
-            if (CharacterManager.Instance.Player.condition.UseStamina(useStamina))
             {
                 attacking = true;
                 animator.SetTrigger("Attack");
                 Invoke("OnCanAttack", attackRate);
             }
-        }
     }
 
     void OnCanAttack()
@@ -50,9 +47,12 @@ public class EquipTool : Equip
 
         if(Physics.Raycast(ray, out hit, attackDistance))
         {
-            if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
+            if (hit.collider.TryGetComponent(out Resource resource))
             {
-                resource.Gather(hit.point, hit.normal);
+                if (doesGatherResources)
+                {
+                    resource.Gather(hit.point, hit.normal);
+                }
             }
         }
     }

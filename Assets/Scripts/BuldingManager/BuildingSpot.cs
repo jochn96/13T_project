@@ -1,39 +1,36 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection.Emit;
+
 using UnityEngine;
 
 public class BuildingSpot : MonoBehaviour, IInteractable
 {
     [Header("Building Settings")]
-    public string buildingName = "Áý";
-    public GameObject buildingObject; // ½ÇÁ¦ °Ç¹° (Cube)
+    public string buildingName = "ï¿½ï¿½";
+    public GameObject buildingObject; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ (Cube)
 
     [Header("Resource Requirements")]
-    public ItemData requiredResource; // ³ª¹« ItemData
-    public int requiredAmount = 5;    // ÇÊ¿äÇÑ °³¼ö
+    public ItemData requiredResource; // ï¿½ï¿½ï¿½ï¿½ ItemData
+    public int requiredAmount = 5;    // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     [Header("Buff Effects")]
     public BuffType buffType = BuffType.HealthRegen;
-    public float buffValue = 0.5f; // Ã¼·Â È¸º¹ +0.5/ÃÊ
+    public float buffValue = 0.5f; // Ã¼ï¿½ï¿½ È¸ï¿½ï¿½ +0.5/ï¿½ï¿½
 
     [Header("Materials")]
-    public Material previewMaterial;  // ¹ÝÅõ¸í ¹Ì¸®º¸±â ¸ÓÆ¼¸®¾ó
-    public Material completeMaterial; // ¿Ï¼ºµÈ °Ç¹° ¸ÓÆ¼¸®¾ó
+    public Material previewMaterial;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½
+    public Material completeMaterial; // ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½
 
     private bool isBuilt = false;
     private Renderer buildingRenderer;
 
     void Start()
     {
-        // °Ç¹° ·»´õ·¯ °¡Á®¿À±â
+        // ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (buildingObject != null)
         {
             buildingRenderer = buildingObject.GetComponent<Renderer>();
         }
 
-        // °Ç¹°À» ¹Ì¸®º¸±â ¸ðµå·Î ¼³Á¤
+        // ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         SetBuildingPreviewMode();
     }
 
@@ -42,11 +39,11 @@ public class BuildingSpot : MonoBehaviour, IInteractable
         if (buildingRenderer != null && previewMaterial != null)
         {
             buildingRenderer.material = previewMaterial;
-            Debug.Log($"{buildingName} °Ç¼³ À§Ä¡ - ¹Ì¸®º¸±â ¸ðµå ¼³Á¤µÊ");
+            Debug.Log($"{buildingName} ï¿½Ç¼ï¿½ ï¿½ï¿½Ä¡ - ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         }
         else
         {
-            Debug.LogWarning("¹Ì¸®º¸±â ¸ÓÆ¼¸®¾óÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogWarning("ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½!");
         }
     }
 
@@ -54,61 +51,61 @@ public class BuildingSpot : MonoBehaviour, IInteractable
     {
         if (isBuilt)
         {
-            return $"{buildingName}\nÀÌ¹Ì °Ç¼³µÈ °Ç¹°ÀÔ´Ï´Ù.";
+            return $"{buildingName}\nï¿½Ì¹ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½Ô´Ï´ï¿½.";
         }
 
-        return $"{buildingName} °Ç¼³\nÇÊ¿ä ÀÚ¿ø: {requiredResource.displayName} {requiredAmount}°³\n[E] °Ç¼³ÇÏ±â";
+        return $"{buildingName} ï¿½Ç¼ï¿½\nï¿½Ê¿ï¿½ ï¿½Ú¿ï¿½: {requiredResource.displayName} {requiredAmount}ï¿½ï¿½\n[E] ï¿½Ç¼ï¿½ï¿½Ï±ï¿½";
     }
 
     public void OnInteract()
     {
         if (isBuilt)
         {
-            Debug.Log("ÀÌ¹Ì °Ç¼³µÈ °Ç¹°ÀÔ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½Ô´Ï´ï¿½.");
             return;
         }
 
-        // ÀÎº¥Åä¸®¿¡¼­ ÀÚ¿ø È®ÀÎ
+        // ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ È®ï¿½ï¿½
         if (HasEnoughResources())
         {
-            // ÀÚ¿ø ¼Ò¸ð
+            // ï¿½Ú¿ï¿½ ï¿½Ò¸ï¿½
             ConsumeResources();
 
-            // °Ç¹° °Ç¼³
+            // ï¿½Ç¹ï¿½ ï¿½Ç¼ï¿½
             ConstructBuilding();
         }
         else
         {
-            // ÀÚ¿ø ºÎÁ· ¸Þ½ÃÁö
+            // ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½
             ShowInsufficientResourcesMessage();
         }
     }
 
     bool HasEnoughResources()
     {
-        // TODO: ½ÇÁ¦ ÀÎº¥Åä¸® ½Ã½ºÅÛ°ú ¿¬°á
-        // ÇöÀç´Â ÀÓ½Ã·Î true ¹ÝÈ¯ (Å×½ºÆ®¿ë)
-        Debug.Log($"ÀÚ¿ø È®ÀÎ: {requiredResource.displayName} {requiredAmount}°³ ÇÊ¿ä");
-        return true; // Å×½ºÆ®¿ë - ³ªÁß¿¡ ½ÇÁ¦ ÀÎº¥Åä¸® Ã¼Å©·Î ±³Ã¼
+        // TODO: ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½Ã½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½Ã·ï¿½ true ï¿½ï¿½È¯ (ï¿½×½ï¿½Æ®ï¿½ï¿½)
+        Debug.Log($"ï¿½Ú¿ï¿½ È®ï¿½ï¿½: {requiredResource.displayName} {requiredAmount}ï¿½ï¿½ ï¿½Ê¿ï¿½");
+        return true; // ï¿½×½ï¿½Æ®ï¿½ï¿½ - ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® Ã¼Å©ï¿½ï¿½ ï¿½ï¿½Ã¼
     }
 
     void ConsumeResources()
     {
-        // TODO: ½ÇÁ¦ ÀÎº¥Åä¸®¿¡¼­ ¾ÆÀÌÅÛ Á¦°Å
-        Debug.Log($"ÀÚ¿ø ¼Ò¸ð: {requiredResource.displayName} {requiredAmount}°³");
+        // TODO: ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        Debug.Log($"ï¿½Ú¿ï¿½ ï¿½Ò¸ï¿½: {requiredResource.displayName} {requiredAmount}ï¿½ï¿½");
     }
 
     void ConstructBuilding()
     {
-        Debug.Log($"{buildingName} °Ç¼³ ¿Ï·á! ");
+        Debug.Log($"{buildingName} ï¿½Ç¼ï¿½ ï¿½Ï·ï¿½! ");
 
-        // °Ç¹° »óÅÂ º¯°æ
+        // ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         isBuilt = true;
 
-        // °Ç¹°À» ¿Ï¼ºµÈ ¸ð½ÀÀ¸·Î º¯°æ (SetActive Á¦°Å)
+        // ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (SetActive ï¿½ï¿½ï¿½ï¿½)
         SetBuildingCompleteMode();
 
-        // ¹öÇÁ Àû¿ë
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         ApplyBuff();
     }
 
@@ -117,11 +114,11 @@ public class BuildingSpot : MonoBehaviour, IInteractable
         if (buildingRenderer != null && completeMaterial != null)
         {
             buildingRenderer.material = completeMaterial;
-            Debug.Log("°Ç¹°ÀÌ ¿Ï¼ºµÈ ¸ð½ÀÀ¸·Î º¯°æµÊ!");
+            Debug.Log("ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½!");
         }
         else
         {
-            Debug.LogWarning("¿Ï¼º ¸ÓÆ¼¸®¾óÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogWarning("ï¿½Ï¼ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½!");
         }
     }
 
@@ -130,7 +127,7 @@ public class BuildingSpot : MonoBehaviour, IInteractable
         PlayerBuffManager buffManager = CharacterManager.Instance.Player.GetComponent<PlayerBuffManager>();
         if (buffManager == null)
         {
-            // PlayerBuffManager°¡ ¾øÀ¸¸é Ãß°¡
+            // PlayerBuffManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
             buffManager = CharacterManager.Instance.Player.gameObject.AddComponent<PlayerBuffManager>();
         }
 
@@ -138,16 +135,16 @@ public class BuildingSpot : MonoBehaviour, IInteractable
         {
             buffType = buffType,
             value = buffValue,
-            description = $"{buildingName} È¿°ú: Ã¼·Â È¸º¹ +{buffValue}/ÃÊ"
+            description = $"{buildingName} È¿ï¿½ï¿½: Ã¼ï¿½ï¿½ È¸ï¿½ï¿½ +{buffValue}/ï¿½ï¿½"
         };
 
         buffManager.AddBuff(buff);
-        Debug.Log($"¹öÇÁ Àû¿ë: {buff.description}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {buff.description}");
     }
 
     void ShowInsufficientResourcesMessage()
     {
-        Debug.Log($"ÀÚ¿øÀÌ ºÎÁ·ÇÕ´Ï´Ù! {requiredResource.displayName} {requiredAmount}°³°¡ ÇÊ¿äÇÕ´Ï´Ù.");
-        // TODO: UI ¸Þ½ÃÁö ÆË¾÷ Ç¥½Ã
+        Debug.Log($"ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½! {requiredResource.displayName} {requiredAmount}ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Õ´Ï´ï¿½.");
+        // TODO: UI ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½Ë¾ï¿½ Ç¥ï¿½ï¿½
     }
 }
