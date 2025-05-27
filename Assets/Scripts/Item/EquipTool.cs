@@ -4,52 +4,24 @@ using UnityEngine;
 
 public class EquipTool : Equip
 {
-    public float attackRate;
-    private bool attacking;
-    public float attackDistance;
-    public float useStamina;
-
-    [Header("Resource Gathering")]
-    public bool doesGatherResources;
-
-    [Header("Combat")]
-    public bool doesDealDamage;
-    public int damage;
-
-    private Animator animator;
-    private Camera camera;
-
+    public ItemData itemToGive;  //주는 아이템
+    public int quiiantityPerHit = 1; //타격수
+    public int capacy;  //채취할수 있는 갯수
+    public Resource resource;
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        camera = Camera.main;
+        resource = GetComponent<Resource>();
     }
-
-    public override void OnAttackInput()
+    public void Gather(Vector3 hitPoint, Vector3 hitNomal)
     {
-        if (!attacking)
-            {
-                attacking = true;
-                animator.SetTrigger("Attack");
-                Invoke("OnCanAttack", attackRate);
-            }
-    }
-
-    void OnCanAttack()
-    {
-        attacking = false;
-    }
-
-    public void OnHit()
-    {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit, attackDistance))
+        for (int i = 0; i < quiiantityPerHit; i++)  //한번때리면
         {
-            if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
+            capacy -= 1;  //채취할수 있는 갯수 감소
+            Instantiate(itemToGive.dropPrefab, hitPoint + Vector3.up, Quaternion.LookRotation(hitNomal, Vector3.up));  //주는 아이템을 랜덤위치에 드랍
+            if (capacy <= 0)  //만약에 채취할 수 있는 갯수가 없으면
             {
-                resource.Gather(hit.point, hit.normal);
+                Destroy(gameObject);  //게임오브젝트는 파괴
+                break;
             }
         }
     }
