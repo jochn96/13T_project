@@ -43,7 +43,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     private void Update()
     {
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
-        //water.Subject(water.passiveValue * Time.deltaTime);
+        water.Subject(water.passiveValue * Time.deltaTime);
 
  
         if(hunger.curValue < 0f)
