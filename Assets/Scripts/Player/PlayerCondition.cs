@@ -11,6 +11,7 @@ public interface IDamageIbe
 public class PlayerCondition : MonoBehaviour, IDamageIbe
 {
     public UICondition uICondition;
+    public float healthRegenRate = 1f; //추가한 변수 
 
     Condition health { get { return uICondition.health; } }
     Condition hunger { get { return uICondition.hunger; } }
@@ -24,12 +25,18 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        if(hunger.curValue <= 0f)
+ 
+        if(hunger.curValue < 0f)
+
+ 
         {
             health.Subject(noHungerHealthDecay * Time.deltaTime);
         }
 
-        if(health.curValue <= 0f)
+
+        if(health.curValue < 0f)
+
+
         {
             Die();
         }
@@ -57,11 +64,18 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public bool UseStamina(float amount)
     {
-        if(stamina.curValue -  amount < 0f)
+        if (stamina.curValue - amount < 0f)
         {
             return false;
         }
         stamina.Subject(amount);
         return true;
     }
+
+    public void SetHealthRegenRate(float rate)
+    {
+        // 체력 회복 속도 설정
+        healthRegenRate = rate;
+    }
+
 }
