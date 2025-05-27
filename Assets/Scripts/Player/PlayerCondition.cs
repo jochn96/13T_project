@@ -15,7 +15,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     Condition health { get { return uICondition.health; } }
     Condition hunger { get { return uICondition.hunger; } }
-    Condition stamina { get { return uICondition.stamina; } }
+    Condition water { get { return uICondition.water; } }
 
     public float noHungerHealthDecay;
 
@@ -23,22 +23,25 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     private void Update()
     {
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
-        stamina.Add(stamina.passiveValue * Time.deltaTime);
+        water.Subject(water.passiveValue * Time.deltaTime);
 
  
         if(hunger.curValue < 0f)
-
- 
         {
             health.Subject(noHungerHealthDecay * Time.deltaTime);
         }
-
-
         if(health.curValue < 0f)
-
-
         {
             Die();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Enemy 태그 오브젝트와 충돌시 대미지
+        if (other.CompareTag("Enemy"))
+        {
+            TakePhysiclaDamage(10); //임시 고정 대미지
         }
     }
 
@@ -62,15 +65,11 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         onTakeDamage?.Invoke();
     }
 
-    public bool UseStamina(float amount)
+    public void DrinkWater(float amount)
     {
-        if (stamina.curValue - amount < 0f)
-        {
-            return false;
-        }
-        stamina.Subject(amount);
-        return true;
+        water.Add(amount);
     }
+
 
     public void SetHealthRegenRate(float rate)
     {
