@@ -33,7 +33,7 @@ public class ResourceManager : MonoBehaviour
 
     public void AddResource(ResourceType type, int amount)
     {
-        Debug.Log("자원증가");
+     
         resources[type] += amount;
         UpdateUI();
     }
