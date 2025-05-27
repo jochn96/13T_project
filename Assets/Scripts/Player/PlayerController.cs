@@ -124,4 +124,9 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
     }
+
+    public Vector3 GetMoveDirection()
+    {
+        return new Vector3(curMovementImput.x, 0f, curMovementImput.y);
+    }
 }
