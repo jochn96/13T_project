@@ -23,7 +23,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     private void Update()
     {
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
-        water.Subject(water.passiveValue * Time.deltaTime);
+        //water.Subject(water.passiveValue * Time.deltaTime);
 
  
         if(hunger.curValue < 0f)
@@ -36,14 +36,14 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Enemy 태그 오브젝트와 충돌시 대미지
-        if (other.CompareTag("Enemy"))
-        {
-            TakePhysiclaDamage(10); //임시 고정 대미지
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Enemy 태그 오브젝트와 충돌시 대미지
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        TakePhysiclaDamage(10); //임시 고정 대미지
+    //    }
+    //}
 
     public void Heal(float amout)
     {
