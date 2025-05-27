@@ -94,6 +94,7 @@ public class UIInventory : MonoBehaviour
             if (slot != null)
             {
                 slot.quantity++;
+                UpdateUI();
                 CharacterManager.Instance.Player.itemData = null;
                 return;
             }
