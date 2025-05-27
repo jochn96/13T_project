@@ -4880,17 +4880,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Z_Walking1
       objectReference: {fileID: 0}
+    - target: {fileID: 4972208476566155580, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandIndex1'\n\tTransform 'mixamorig:LeftHandPinky2'\n\tTransform
+        'mixamorig:RightHandRing2'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftHandMiddle3'\n\tand
+        more ...\n\tFrom animation clip 'mixamo.com'"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268170361817540141, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8277422611098589182, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.55
+      value: 11.29
       objectReference: {fileID: 0}
     - target: {fileID: 8277422611098589182, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8277422611098589182, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 6.22
       objectReference: {fileID: 0}
     - target: {fileID: 8277422611098589182, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6465,6 +6479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964377620}
+  - component: {fileID: 1964377621}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -6481,13 +6496,34 @@ Transform:
   m_GameObject: {fileID: 1964377619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.00236, y: 1.1623133, z: 10.875269}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1279451276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1964377621
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964377619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a993fc7b546cc2468b4fc46f82552b8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1990677850
 GameObject:
   m_ObjectHideFlags: 0
