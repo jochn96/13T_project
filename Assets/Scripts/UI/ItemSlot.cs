@@ -50,5 +50,22 @@ public class ItemSlot : MonoBehaviour
     public void OnClickButton()
     {
         inventory.SelectItem(index);
+        if (item == null) return;
+
+        // 소비형 아이템이면 회복 효과 적용
+        if (item.type == ItemType.Consumable)
+        {
+            CharacterManager.Instance.Player.condition.RestoreFromItem(item);
+            quantity--;
+
+            if (quantity <= 0)
+            {
+                inventory.Selected(index);
+            }
+            else
+            {
+                Set(); // UI 갱신
+            }
+        }
     }
 }

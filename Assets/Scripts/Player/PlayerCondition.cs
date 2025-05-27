@@ -19,6 +19,27 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public float noHungerHealthDecay;
 
+    public void RestoreFromItem(ItemData item)
+    {
+        if (item.type != ItemType.Consumable) return;
+
+        foreach (var effect in item.consumables)
+        {
+            switch (effect.type)
+            {
+                case ConsumableType.Health:
+                    health.Add(effect.value); // 체력 회복
+                    break;
+                case ConsumableType.Hunger:
+                    hunger.Add(effect.value); // 허기 회복
+                    break;
+                case ConsumableType.Water:
+                    water.Add(effect.value); // 수분 회복
+                    break;
+            }
+        }
+    }
+    
     public event Action onTakeDamage;
     private void Update()
     {
