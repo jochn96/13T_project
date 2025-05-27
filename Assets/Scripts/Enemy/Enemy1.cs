@@ -9,14 +9,14 @@ public class Enemy : MonoBehaviour
     public EnemyAttack hitbox;
 
     [Header("Enemy Settings")]
-    public float moveSpeed = 2f;  // 적용 안됨 애니메이터에서 속도 조절해야됨
+    public float moveSpeed = 2f;  
     public float rotationSpeed = 100f;
     public Animator animator;
 
     [Header("Player Settings")]
     public Transform player;
-    public float detectDistance = 5f;      // (현재는 안 쓰지만 유지)
-    public float attackDistance = 2f;
+    public float detectDistance = 5f;   //플레이어 감지범위 현재안쓰는중
+    public float attackDistance = 2f;   //플레이어 공격범위
 
     [Header("Attack Settings")]
     public float attackCooldown = 1f;
