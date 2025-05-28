@@ -7,7 +7,7 @@ public class ResourceSpawn : MonoBehaviour
     [SerializeField] List<Bounds> spawnAreas;                            //스폰 영역 입력
     [SerializeField] private Color gizmoColor = new Color(1, 0, 0, .3f); //영역 표시 색 
     [SerializeField] private List<GameObject> resourcePrefabs;           //리소스 프리팹 등록
-
+    public float spawnTime;
     private void Start()
     {
         StartCoroutine(SpawnTime());  //스폰타임 코루틴 시작
@@ -41,7 +41,7 @@ public class ResourceSpawn : MonoBehaviour
         while (true) //무한루프
         {
             RandomSpawn();
-            yield return new WaitForSeconds(1f);  //1초간 기다렸다가 생성
+            yield return new WaitForSeconds(spawnTime);  //1초간 기다렸다가 생성
         }
     }
 
