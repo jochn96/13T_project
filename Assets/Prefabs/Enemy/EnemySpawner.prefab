@@ -53,7 +53,7 @@ MonoBehaviour:
     spawnPoints:
     - {fileID: 2456986209007515517}
     spawnRadius: 8
-    maxEnemiesInZone: 7
+    maxEnemiesInZone: 15
     spawnChance: 1
   spawnInterval: 0.6
   despawnCheckInterval: 1
