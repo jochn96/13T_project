@@ -12,6 +12,9 @@ public class NPCAreaController : MonoBehaviour
             canvasGameobject.SetActive(true);
         }
         
-        
+        else 
+        {
+            canvasGameobject.SetActive(false);
+        }
     }
 }
