@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 6070026169927465549}
   - component: {fileID: 3255055036636320160}
   - component: {fileID: 5816396609953900161}
+  - component: {fileID: 756273627820805101}
   m_Layer: 0
   m_Name: NPCArea
   m_TagString: Untagged
@@ -214,6 +215,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &756273627820805101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074720779884530573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba08937068344644a03b820763cc4eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5825073632509850432
 GameObject:
   m_ObjectHideFlags: 0

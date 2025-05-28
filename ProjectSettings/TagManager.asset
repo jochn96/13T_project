@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DialogTag
+  - Player 01
   layers:
   - Default
   - TransparentFX

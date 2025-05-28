@@ -17,8 +17,24 @@ public class NPCAreaController : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter  (Collider other)
     {
-        print(other.gameObject.tag);
+        if (other.gameObject.CompareTag("Player 01"))
+        {
+            GameObject canvas =  GameObject.FindGameObjectWithTag("DialogTag");
+            if (canvas == null)
+            {
+                return;
+            }
+            
+            Transform transform = other.gameObject.transform;
+            GameObject canvas2 = GameObject.FindGameObjectWithTag("DialogTag");
+
+            if (canvas2 == null)
+            {
+                return;
+            }
+            canvas.SetActive(true);
+        }
     }
 }
