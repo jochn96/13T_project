@@ -4662,7 +4662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  fullDayLenth: 60
+  fullDayLenth: 20
   startTime: 0.4
   noon: {x: 0, y: 0, z: 0}
   sun: {fileID: 705507994}
