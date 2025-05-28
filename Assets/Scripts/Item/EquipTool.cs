@@ -4,24 +4,55 @@ using UnityEngine;
 
 public class EquipTool : Equip
 {
-    public ItemData itemToGive;  //주는 아이템
-    public int quiiantityPerHit = 1; //타격수
-    public int capacy;  //채취할수 있는 갯수
-    public Resource resource;
+    public float attackRate;
+    private bool attacking;
+    public float attackDistance;
+    public float useStamina;
+
+    [Header("Resource Gathering")]
+    public bool doesGatherResources;
+
+    [Header("Combat")]
+    public bool doesDealDamage;
+    public int damage;
+
+    private Animator animator;
+    private Camera camera;
+
     private void Start()
     {
-        resource = GetComponent<Resource>();
+        animator = GetComponent<Animator>();
+        camera = Camera.main;
     }
-    public void Gather(Vector3 hitPoint, Vector3 hitNomal)
+
+    public override void OnAttackInput()
     {
-        for (int i = 0; i < quiiantityPerHit; i++)  //한번때리면
-        {
-            capacy -= 1;  //채취할수 있는 갯수 감소
-            Instantiate(itemToGive.dropPrefab, hitPoint + Vector3.up, Quaternion.LookRotation(hitNomal, Vector3.up));  //주는 아이템을 랜덤위치에 드랍
-            if (capacy <= 0)  //만약에 채취할 수 있는 갯수가 없으면
+        if (!attacking)
             {
-                Destroy(gameObject);  //게임오브젝트는 파괴
-                break;
+                attacking = true;
+                animator.SetTrigger("Attack");
+                Invoke("OnCanAttack", attackRate);
+            }
+    }
+
+    void OnCanAttack()
+    {
+        attacking = false;
+    }
+
+    public void OnHit()
+    {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, attackDistance))
+        {
+            if (hit.collider.TryGetComponent(out Resource resource))
+            {
+                if (doesGatherResources)
+                {
+                    resource.Gather(hit.point, hit.normal);
+                }
             }
         }
     }

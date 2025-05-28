@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public interface IDamageIbe
@@ -19,6 +18,27 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public float noHungerHealthDecay;
 
+    public void RestoreFromItem(ItemData item)
+    {
+        if (item.type != ItemType.Consumable) return;
+
+        foreach (var effect in item.consumables)
+        {
+            switch (effect.type)
+            {
+                case ConsumableType.Health:
+                    health.Add(effect.value); // 체력 회복
+                    break;
+                case ConsumableType.Hunger:
+                    hunger.Add(effect.value); // 허기 회복
+                    break;
+                case ConsumableType.Water:
+                    water.Add(effect.value); // 수분 회복
+                    break;
+            }
+        }
+    }
+    
     public event Action onTakeDamage;
     private void Update()
     {
@@ -36,14 +56,14 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Enemy 태그 오브젝트와 충돌시 대미지
-        if (other.CompareTag("Enemy"))
-        {
-            TakePhysiclaDamage(10); //임시 고정 대미지
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Enemy 태그 오브젝트와 충돌시 대미지
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        TakePhysiclaDamage(10); //임시 고정 대미지
+    //    }
+    //}
 
     public void Heal(float amout)
     {

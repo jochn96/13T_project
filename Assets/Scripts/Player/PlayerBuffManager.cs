@@ -11,11 +11,11 @@ public class BuffEffect
 
 public enum BuffType
 {
-    HealthRegen,     // 체력 회복 속도
-    MaxHealth,       // 최대 체력
-    MoveSpeed,       // 이동 속도
-    StaminaRegen,    // 스태미나 회복
-    ResourceGather   // 자원 채집 속도
+    HealthRegen,     // ??? ??? ???
+    MaxHealth,       // ??? ???
+    MoveSpeed,       // ??? ???
+    StaminaRegen,    // ???¹?? ???
+    ResourceGather   // ??? ??? ???
 }
 
 public class PlayerBuffManager : MonoBehaviour
@@ -24,22 +24,22 @@ public class PlayerBuffManager : MonoBehaviour
     public List<BuffEffect> activeBuffs = new List<BuffEffect>();
 
     private PlayerCondition playerCondition;
-    private float originalHealthRegen = 1f; // 기본 체력 회복량
+    private float originalHealthRegen = 1f; // ?? ??? ?????
 
     void Start()
     {
         playerCondition = GetComponent<PlayerCondition>();
 
-        // 기본 체력 회복 시작
+        // ?? ??? ??? ????
         InvokeRepeating("ApplyHealthRegen", 1f, 1f);
     }
 
     public void AddBuff(BuffEffect buff)
     {
         activeBuffs.Add(buff);
-        Debug.Log($"버프 추가됨: {buff.description}");
+        Debug.Log($"???? ?????: {buff.description}");
 
-        // 즉시 효과 적용 (필요한 경우)
+        // ??? ??? ???? (????? ???)
         ApplyBuffEffects();
     }
 
@@ -51,8 +51,8 @@ public class PlayerBuffManager : MonoBehaviour
 
     void ApplyBuffEffects()
     {
-        // 버프별 효과 적용 로직
-        // 여기서는 체력 회복만 구현
+        // ?????? ??? ???? ????
+        // ?????? ??? ????? ????
     }
 
     void ApplyHealthRegen()
@@ -61,7 +61,7 @@ public class PlayerBuffManager : MonoBehaviour
         {
             float totalRegen = originalHealthRegen;
 
-            // 모든 체력 회복 버프 합산
+            // ??? ??? ??? ???? ???
             foreach (BuffEffect buff in activeBuffs)
             {
                 if (buff.buffType == BuffType.HealthRegen)
@@ -70,7 +70,7 @@ public class PlayerBuffManager : MonoBehaviour
                 }
             }
 
-            // 체력 회복 적용
+            // ??? ??? ????
             playerCondition.Heal(totalRegen);
         }
     }
