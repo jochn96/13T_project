@@ -1844,6 +1844,8 @@ GameObject:
   - component: {fileID: 3463665191317796349}
   - component: {fileID: 8029179651344837526}
   - component: {fileID: 528897266249094728}
+  - component: {fileID: -1261346232635044879}
+  - component: {fileID: 5417220488676272033}
   m_Layer: 0
   m_Name: Z_Walking1
   m_TagString: Untagged
@@ -1904,14 +1906,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.34605312
-  m_Height: 2.3187325
+  m_Radius: 0.34
+  m_Height: 2.31
   m_Direction: 1
-  m_Center: {x: 0.13293839, y: 0.8000001, z: 0.3}
+  m_Center: {x: 0.13, y: 0.8, z: 0.3}
 --- !u!114 &8029179651344837526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1946,6 +1948,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttack: {fileID: 6812209474003966891}
+--- !u!54 &-1261346232635044879
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6878530233942535495}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &5417220488676272033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6878530233942535495}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &6928621741035060744
 GameObject:
   m_ObjectHideFlags: 0

@@ -174,14 +174,22 @@ public class Enemy : MonoBehaviour
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // 사망시 기존 콜라이더 제거
+        // 사망 시 콜라이더 제거
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
-                
 
-        // 오브젝트 풀로 반환 (3초 후)
+        // ▶ Rigidbody 비활성화
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+
+
+        // 오브젝트 풀로 반환 (5초 후)
         StartCoroutine(ReturnToPoolAfterDelay(5f));
     }
 
@@ -212,6 +220,14 @@ public class Enemy : MonoBehaviour
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
+        }
+
+        // ▶ Rigidbody 활성화
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
         }
 
         // 걷기 상태로 애니메이션 세팅
