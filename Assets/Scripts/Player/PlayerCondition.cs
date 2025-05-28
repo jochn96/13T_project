@@ -18,32 +18,35 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public float noHungerHealthDecay;
 
-    public void RestoreFromItem(ItemData item)
-    {
-        if (item.type != ItemType.Consumable || item.consumables.Length == 0) return;
+    //public void RestoreFromItem(ItemData item)
+    //{
+    //    if (item.type != ItemType.Consumable || item.consumables.Length == 0) return;
 
-        var effect = item.consumables[0]; //단일회복효과, 체력이면 체력, 허기면 허기, 수분이면 수분 회복
-        {
-            switch (effect.type)
-            {
-                case ConsumableType.Health:
-                    health.Add(effect.value); // 체력 회복
-                    break;
-                case ConsumableType.Hunger:
-                    hunger.Add(effect.value); // 허기 회복
-                    break;
-                case ConsumableType.Water:
-                    water.Add(effect.value); // 수분 회복
-                    break;
-            }
-        }
-    }
+    //    var effect = item.consumables[0]; //단일회복효과, 체력이면 체력, 허기면 허기, 수분이면 수분 회복
+    //    {
+    //        switch (effect.type)
+    //        {
+    //            case ConsumableType.Health:
+    //                health.Add(effect.value); // 체력 회복
+    //                break;
+    //            case ConsumableType.Hunger:
+    //                hunger.Add(effect.value); // 허기 회복
+    //                break;
+    //            case ConsumableType.Water:
+    //                water.Add(effect.value); // 수분 회복
+    //                break;
+    //        }
+    //    }
+    //}
     
     public event Action onTakeDamage;
     private void Update()
     {
-        hunger.Subject(hunger.passiveValue * Time.deltaTime);
-        water.Subject(water.passiveValue * Time.deltaTime);
+        if (IsPlayerMoving())
+        {
+            hunger.Subject(hunger.passiveValue * Time.deltaTime);
+            water.Subject(water.passiveValue * Time.deltaTime);
+        }
 
  
         if(hunger.curValue < 0f)
@@ -54,6 +57,12 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         {
             Die();
         }
+    }
+
+    private bool IsPlayerMoving()
+    {
+        Vector3 velocity = CharacterManager.Instance.Player.controller.GetMoveDirection();
+        return velocity.magnitude > 0.1f; // 이동 중이면 true
     }
 
     //private void OnTriggerEnter(Collider other)
