@@ -72,9 +72,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void OnNightStart()
+    void OnNightStart() //밤 되면 몬스터 스폰 시작
     {
-        Debug.Log("밤이 시작됨 - 몬스터 스폰 시작");
+       
 
         if (spawnCoroutine != null)
             StopCoroutine(spawnCoroutine);
