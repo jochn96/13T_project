@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
+using static UnityEditor.MaterialProperty;
 
 public class Weater : MonoBehaviour
 {
+    public Weatherdata[] weatherdatas;
+
     public DropType droptype;
 
     private void Start()
@@ -15,6 +19,24 @@ public class Weater : MonoBehaviour
 
         Debug.Log(weater);  //날씨 확인용 디버그
 
+        Weatherdata selectedData = null;  //초기화
 
+        foreach (var data in weatherdatas)
+        {
+            if (data.Type == weater)  //만약에 데이터 타입이 날씨면 선택한날씨에 데이터 넣기
+            {
+                selectedData = data; break;  
+            }
+        }
+
+        if (selectedData != null && selectedData.Event == EventType.Drop)  //데이터가 null이 아니고 이벤트가 드랍이라면!
+        {
+            droptype.weatherdata = selectedData;  
+            droptype.StartWeaterCor();  //드랍코루틴 시작
+        }
+        else
+        {
+            Debug.Log("해당 날씨에 Drop 이벤트가 없습니다.");
+        }
     }
 }

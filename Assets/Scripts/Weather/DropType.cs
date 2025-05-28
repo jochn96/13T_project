@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DropType : MonoBehaviour
@@ -10,18 +9,7 @@ public class DropType : MonoBehaviour
 
     private void Start()
     {
-        try
-        {
-            DropPrefab = weatherdata.weaterPrefabs;  //드랍 프리팹을 데이터에서 불러오기
-            if (DropPrefab == null)              //만약에 드랍 프리팹이 없으면 던지기
-                throw new System.Exception("프리팹 데이터가 없습니다.");
-
-            StartWeaterCor();  //그렇지 않으면 코루틴 시작
-        }
-        catch  //오류처리
-        {
-            Debug.Log("날씨 오류");
-        }
+        
     }
 
     private IEnumerator WeaterCor(GameObject dropFre)
@@ -39,13 +27,24 @@ public class DropType : MonoBehaviour
         }
     }
 
-    private void StartWeaterCor()
+    public void StartWeaterCor()
     {
-        if (dropCoroutine != null)  //이미 실행중인 코루틴이 있으면 코루틴을 종료하고 시작
+        try
         {
-            StopCoroutine(dropCoroutine);
-            dropCoroutine = null;
+            DropPrefab = weatherdata.weaterPrefabs;  //드랍 프리팹을 데이터에서 불러오기
+            if (DropPrefab == null)              //만약에 드랍 프리팹이 없으면 던지기
+                throw new System.Exception("프리팹 데이터가 없습니다.");
+            if (dropCoroutine != null)  //이미 실행중인 코루틴이 있으면 코루틴을 종료하고 시작
+            {
+                StopCoroutine(dropCoroutine);
+                dropCoroutine = null;
+            }
+            dropCoroutine = StartCoroutine(WeaterCor(DropPrefab));
+            StartWeaterCor();  //그렇지 않으면 코루틴 시작
         }
-        dropCoroutine = StartCoroutine(WeaterCor(DropPrefab));
+        catch  //오류처리
+        {
+            Debug.Log("날씨 오류");
+        }
     }
 }
