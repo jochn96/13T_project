@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30db28198a59f7040a6a7492f71c05df, type: 3}
   m_Name: Rain
   m_EditorClassIdentifier: 
+  name: rain
+  Event: 0
   Type: 0
-  weaterPrefabs: {fileID: 5153515252536292485, guid: ecea899e1211b3049aa34f2a13f461bb, type: 3}
+  weaterPrefabs: {fileID: 9207391326213874564, guid: b7d79fff268a8434e844c89ea0efde73, type: 3}
