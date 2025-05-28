@@ -20,9 +20,9 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public void RestoreFromItem(ItemData item)
     {
-        if (item.type != ItemType.Consumable) return;
+        if (item.type != ItemType.Consumable || item.consumables.Length == 0) return;
 
-        foreach (var effect in item.consumables)
+        var effect = item.consumables[0]; //단일회복효과, 체력이면 체력, 허기면 허기, 수분이면 수분 회복
         {
             switch (effect.type)
             {
