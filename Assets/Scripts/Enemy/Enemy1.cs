@@ -22,6 +22,9 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 1f;
     private float attackTimer = 0f;
 
+    [Header("오브젝트 설정")]
+    public string poolName = "원하는 이름";
+
     private State currentState = State.Detect;
     private bool isDead = false;
 
@@ -171,16 +174,30 @@ public class Enemy : MonoBehaviour
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // 콜라이더 제거 , 사망시 다른 에너미랑 충돌처리 없앰
+        // 사망시 기존 콜라이더 제거
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
+                
 
-        Debug.Log("적 사망");
+        // 오브젝트 풀로 반환 (3초 후)
+        StartCoroutine(ReturnToPoolAfterDelay(5f));
+    }
 
-        // 3초 뒤 제거
-        Destroy(gameObject, 3f);
+    private System.Collections.IEnumerator ReturnToPoolAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (ObjectPoolManager.Instance != null)
+        {
+            ObjectPoolManager.Instance.ReturnToPool(poolName, gameObject);
+        }
+        else
+        {
+            // 풀이 없으면 기존 방식으로 파괴
+            Destroy(gameObject);
+        }
     }
 
     void OnEnable()
@@ -191,6 +208,11 @@ public class Enemy : MonoBehaviour
 
         animator.ResetTrigger("IsDie");
         animator.ResetTrigger("IsAttack");
+
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = true;
+        }
 
         // 걷기 상태로 애니메이션 세팅
         animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));
