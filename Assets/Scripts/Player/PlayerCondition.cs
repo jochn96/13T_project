@@ -40,7 +40,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     
     public event Action onTakeDamage;
-    private void Update()
+    /*private void Update()
     {
         hunger.Subject(hunger.passiveValue * Time.deltaTime);
         water.Subject(water.passiveValue * Time.deltaTime);
@@ -54,7 +54,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         {
             Die();
         }
-    }
+    }*/
 
     //private void OnTriggerEnter(Collider other)
     //{

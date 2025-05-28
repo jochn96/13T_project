@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 49349763}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Player 01
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7135,10 +7135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
-    - target: {fileID: 645064843829314756, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 2495014035263338637, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -7179,9 +7175,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5074720779884530573, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
-      propertyPath: m_TagString
-      value: DialogTag
+    - target: {fileID: 5816396609953900161, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5816396609953900161, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5816396609953900161, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
+      propertyPath: m_Size.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
