@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +10,12 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        Destroy(gameObject, 5f); // È­»ì Á¦°Å
+        Destroy(gameObject, 5f); // í™”ì‚´ ì œê±°
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Àû ¶Ç´Â ¿ÀºêÁ§Æ®¿¡ µ¥¹ÌÁö Ã³¸®
+        // ì  ë˜ëŠ” ì˜¤ë¸Œì íŠ¸ì— ë°ë¯¸ì§€ ì²˜ë¦¬
         Destroy(gameObject);
     }
 }
