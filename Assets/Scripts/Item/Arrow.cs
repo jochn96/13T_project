@@ -4,45 +4,18 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public float speed = 20f;
-    public float maxLifeTime = 5f;
-    private Rigidbody rb;
+    public float speed = 50f;
+    public int damage = 10;
 
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        rb.velocity = transform.forward * speed;
-        Invoke(nameof(ReturnToPool), maxLifeTime);
+        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        Destroy(gameObject, 5f); // 화살 제거
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            // 적 죽이기 (적 스크립트에 맞는 함수 호출)
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.Die();
-            }
-
-            // 화살 비활성화 또는 파괴
-            ReturnToPool();
-        }
-        else if (other.CompareTag("Wall"))
-        {
-            // 벽에 맞았을 때 처리
-            ReturnToPool();
-        }
-    }
-
-    void ReturnToPool()
-    {
-        // 풀링 쓰면 반환, 아니면 Destroy
-        gameObject.SetActive(false);
+        // 적 또는 오브젝트에 데미지 처리
+        Destroy(gameObject);
     }
 }

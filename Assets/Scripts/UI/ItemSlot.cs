@@ -51,4 +51,5 @@ public class ItemSlot : MonoBehaviour
     {
         inventory.SelectItem(index);
     }
+
 }
