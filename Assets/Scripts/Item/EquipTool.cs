@@ -49,6 +49,15 @@ public class EquipTool : Equip
         {
             if (hit.collider.TryGetComponent(out Resource resource))
             {
+                if (resource.type == ResourceType.Stone)
+                {
+                    SoundManager.Instance.PlaySFX("stone_gather");
+                }
+                if (resource.type == ResourceType.Wood)
+                {
+                    SoundManager.Instance.PlaySFX("wood_gather");
+                }
+
                 if (doesGatherResources)
                 {
                     resource.Gather(hit.point, hit.normal);

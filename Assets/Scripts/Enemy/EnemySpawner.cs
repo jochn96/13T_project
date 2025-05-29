@@ -83,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
 
     void OnDayStart()
     {
-        Debug.Log("³·ÀÌ ½ÃÀÛµÊ - ¸ðµç ¸ó½ºÅÍ Á¦°Å");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ - ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
         if (spawnCoroutine != null)
         {
@@ -171,14 +171,14 @@ public class EnemySpawner : MonoBehaviour
                     enemyScript.player = player;
                 }
 
-                Debug.Log($"¸ó½ºÅÍ°¡ {zone.zoneName}¿¡ ½ºÆùµÊ: {spawnPosition}");
+              //  Debug.Log($"ï¿½ï¿½ï¿½Í°ï¿½ {zone.zoneName}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: {spawnPosition}");
             }
         }
     }
 
     Vector3 GetValidSpawnPosition(Vector3 centerPosition, float radius)
     {
-        // ´Ü¼ø ·£´ý À§Ä¡ ¹ÝÈ¯ (°Å¸® Á¦ÇÑ ¾øÀ½)
+        // ï¿½Ü¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½È¯ (ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         Vector3 randomOffset = new Vector3(
             Random.Range(-radius, radius),
             0,
@@ -245,7 +245,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        // ÇÃ·¹ÀÌ¾î °Å¸® ½Ã°¢È­ Á¦°Å
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Å¸ï¿½ ï¿½Ã°ï¿½È­ ï¿½ï¿½ï¿½ï¿½
     }
 
     void OnGUI()
@@ -253,14 +253,14 @@ public class EnemySpawner : MonoBehaviour
         if (!Application.isPlaying) return;
 
         GUILayout.BeginArea(new Rect(10, 10, 300, 200));
-        GUILayout.Label($"ÇöÀç ½Ã°£: {dayNightCycle.time:F2}");
-        GUILayout.Label($"¹ã ¿©ºÎ: {isNight}");
-        GUILayout.Label($"È°¼º ¸ó½ºÅÍ ¼ö: {activeEnemies.Count}");
+        GUILayout.Label($"ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½: {dayNightCycle.time:F2}");
+        GUILayout.Label($"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {isNight}");
+        GUILayout.Label($"È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½: {activeEnemies.Count}");
 
         if (ObjectPoolManager.Instance != null)
         {
-            GUILayout.Label($"Ç®¿¡¼­ È°¼ºÈ­µÈ Àû: {ObjectPoolManager.Instance.GetActiveCount(enemyPoolName)}");
-            GUILayout.Label($"Ç® ÀüÃ¼ Å©±â: {ObjectPoolManager.Instance.GetPoolSize(enemyPoolName)}");
+            GUILayout.Label($"Ç®ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½: {ObjectPoolManager.Instance.GetActiveCount(enemyPoolName)}");
+            GUILayout.Label($"Ç® ï¿½ï¿½Ã¼ Å©ï¿½ï¿½: {ObjectPoolManager.Instance.GetPoolSize(enemyPoolName)}");
         }
 
         GUILayout.EndArea();
