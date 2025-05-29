@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3786613074502458773}
   - component: {fileID: 226054170986058288}
   - component: {fileID: 2650346784732112634}
+  - component: {fileID: 6407808695439200478}
   m_Layer: 8
   m_Name: Sword_01
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6407808695439200478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595659725871367983}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2939173, y: 1.1839275, z: 0.08148709}
+  m_Center: {x: 1.3877788e-15, y: 0.45851684, z: 0.000000069536014}
 --- !u!1 &7276203503186806211
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +118,7 @@ GameObject:
   - component: {fileID: 996965050612632382}
   m_Layer: 8
   m_Name: Equip_Sword
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,6 +157,9 @@ MonoBehaviour:
   doesGatherResources: 0
   doesDealDamage: 1
   damage: 10
+  Item_ArrowPrefab: {fileID: 0}
+  arrowSpawnPoint: {fileID: 0}
+  arrowSpeed: 50
 --- !u!95 &996965050612632382
 Animator:
   serializedVersion: 5

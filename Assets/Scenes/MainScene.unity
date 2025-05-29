@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e8e43774ca1f2d942b065bb371f6e600, type: 2}
 --- !u!1 &4357605
 GameObject:
   m_ObjectHideFlags: 0
@@ -9227,6 +9227,10 @@ PrefabInstance:
     - target: {fileID: 1619229252896081708, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
       propertyPath: m_Name
       value: RZ_Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1619229252896081708, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3001028226030974055, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
       propertyPath: m_LocalPosition.x

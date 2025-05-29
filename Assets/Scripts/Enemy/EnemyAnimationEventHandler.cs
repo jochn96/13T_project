@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +9,12 @@ public class EnemyAnimationEventHandler : MonoBehaviour
 
     public void AttackStart()
     {
-        enemyAttack.EnableHit(); // °ø°İ ½ÃÀÛ ½Ã Äİ¶óÀÌ´õ È°¼ºÈ­
+        enemyAttack.EnableHit(); // ê³µê²© ì‹œì‘ ì‹œ ì½œë¼ì´ë” í™œì„±í™”
     }
 
     public void AttackEnd()
     {
-        enemyAttack.ResetHit();  // °ø°İ Á¾·á ½Ã Äİ¶óÀÌ´õ ºñÈ°¼ºÈ­
+        enemyAttack.ResetHit();  // ê³µê²© ì¢…ë£Œ ì‹œ ì½œë¼ì´ë” ë¹„í™œì„±í™”
     }
 }
 

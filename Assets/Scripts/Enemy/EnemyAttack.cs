@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public int damage = 10; // °ø°İÇÇÇØ
+    public int damage = 10; // ê³µê²©í”¼í•´
     private bool hasHit = false;
 
     public Collider hitCollider;
 
-    public void ResetHit() //¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ® È£Ãâ ÃÊ±âÈ­
+    public void ResetHit() //ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ í˜¸ì¶œ ì´ˆê¸°í™”
     {
         if (hitCollider != null)
         {
@@ -28,16 +28,16 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasHit) return; // Áßº¹ Å¸°İ ¹æÁö
+        if (hasHit) return; // ì¤‘ë³µ íƒ€ê²© ë°©ì§€
 
         if (other.CompareTag("Player"))
         {
-            // ÇÃ·¹ÀÌ¾îÀÇ Condition ÄÄÆ÷³ÍÆ® Ã£±â
+            // í”Œë ˆì´ì–´ì˜ Condition ì»´í¬ë„ŒíŠ¸ ì°¾ê¸°
             PlayerCondition condition = other.GetComponent<PlayerCondition>();
             if (condition != null)
             {
-                condition.TakePhysiclaDamage(damage); // °ø°İÇÇÇØ ÀÔÈ÷±â
-                Debug.Log("ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ ÀÔÈû: " + damage);
+                condition.TakePhysiclaDamage(damage); // ê³µê²©í”¼í•´ ì…íˆê¸°
+                Debug.Log("í”Œë ˆì´ì–´ì—ê²Œ í”¼í•´ ì…í˜: " + damage);
             }
 
             hasHit = true;

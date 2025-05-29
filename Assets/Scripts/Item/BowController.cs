@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ public class BowController : MonoBehaviour
 
     void Update()
     {
-        // ¸¶¿ì½º ¿ŞÂÊ Å¬¸¯ ½Ã ¹ß»ç ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å
+        // ë§ˆìš°ìŠ¤ ì™¼ìª½ í´ë¦­ ì‹œ ë°œì‚¬ ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±°
         if (Input.GetMouseButtonDown(0))
         {
             Fire();
