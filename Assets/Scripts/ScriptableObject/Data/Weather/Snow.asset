@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Snow
   m_EditorClassIdentifier: 
   name: snow
-  Event: 0
-  Type: 1
+  value: 1
+  weatherBuffType: 0
   weaterPrefabs: {fileID: 8472302102655500736, guid: c9aac574194a7a84984cdb46f867f814, type: 3}
