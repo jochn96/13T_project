@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5182646, g: 0.62582666, b: 0.82815355, a: 1}
+  m_IndirectSpecularColor: {r: 0.51826495, g: 0.6258267, b: 0.82815474, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: e8e43774ca1f2d942b065bb371f6e600, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &4357605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,7 +4017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 4357609}
   hunger: {fileID: 511730637}
-  water: {fileID: 0}
+  water: {fileID: 1318864572}
 --- !u!1 &1111495765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4978,7 +4978,7 @@ GameObject:
   - component: {fileID: 1318864570}
   - component: {fileID: 1318864572}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6750,7 +6750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120.4, y: -92.6}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 90}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1924965973
@@ -7794,7 +7794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5985b1fa2244b9849afbe72874c49b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uICondition: {fileID: 0}
+  uICondition: {fileID: 1111111014}
   healthRegenRate: 1
   noHungerHealthDecay: 2
 --- !u!1 &80884608559753049
@@ -9227,10 +9227,6 @@ PrefabInstance:
     - target: {fileID: 1619229252896081708, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
       propertyPath: m_Name
       value: RZ_Idle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1619229252896081708, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3001028226030974055, guid: 212e7bb5781fac5429e4bd4619cabd8a, type: 3}
       propertyPath: m_LocalPosition.x
