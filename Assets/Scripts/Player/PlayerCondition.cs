@@ -63,7 +63,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         //{
         //    Die();
         //}
-    }
+    } */ 
 
 <<<<<<< HEAD
     private bool IsPlayerMoving()
