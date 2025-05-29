@@ -8,9 +8,12 @@ public class Weater : MonoBehaviour
     public Weatherdata[] weatherdata;  //날씨에 데이터가져오기
     public float ActiveTime = 30f;     //날씨 변화 주기 설정
     private GameObject weatherParticle;//소환할 파티클 선언
+    private PlayerCondition playerCondition;
 
     private void Start()
     {
+        playerCondition = GetComponentInParent<PlayerCondition>();
+
         StartCoroutine(WeaterCor());  //게임이 시작되면 코루틴 시작
     }
     private void StartWeatherCoroutine()  //예비 코루틴
@@ -29,6 +32,17 @@ public class Weater : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
+            if (weatherdata[randomWeater].weatherBuffType == WeatherBuffType.Health)
+            {
+                Debug.Log("Healty Type");
+                StartCoroutine(WeatherHealCor(weatherdata[randomWeater].value));
+            }
+            else if (weatherdata[randomWeater].weatherBuffType == WeatherBuffType.Stamina)
+            {
+                Debug.Log("Stamina Type");
+                StartCoroutine(WeatherStaminaCor(weatherdata[randomWeater].value));
+            }
+
             if (weatherdata[randomWeater].weaterPrefabs == null)  //만약에 프리팹이 없다면
             {
                 yield return new WaitForSeconds(ActiveTime);   //설정해놓은 대기시간동안 기다렸다가
@@ -45,6 +59,26 @@ public class Weater : MonoBehaviour
             var instance = Instantiate(weatherParticle, worldPosition, rotation, transform); //위에 선언한 값으로 프리팹 소환
 
             yield return new WaitForSeconds(ActiveTime);  //대기시간동안 기다리기
+        }
+    }
+
+    private IEnumerator WeatherHealCor(float weatherValue)
+    {
+        while (true)
+        {
+            playerCondition.Heal(weatherValue);
+
+            yield return new WaitForSeconds(ActiveTime);
+        }
+    }
+
+    private IEnumerator WeatherStaminaCor(float weatherValue)
+    {
+        while (true)
+        {
+            playerCondition.DrinkWater(weatherValue);
+
+            yield return new WaitForSeconds(ActiveTime);
         }
     }
 }
