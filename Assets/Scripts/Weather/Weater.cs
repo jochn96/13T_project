@@ -8,6 +8,11 @@ public class Weater : MonoBehaviour
     public Weatherdata[] weatherdata;  //날씨에 데이터가져오기
     public float ActiveTime = 30f;     //날씨 변화 주기 설정
     private GameObject weatherParticle;//소환할 파티클 선언
+    [Header("Buff Effects")]
+    public BuffType HealthbuffType = BuffType.HealthRegen;
+    public BuffType StaminabuffType = BuffType.StaminaRegen;
+    public float HealbuffValue = 1f;
+    public float StaminabuffValue = 5f;
 
     private void Start()
     {
@@ -46,5 +51,25 @@ public class Weater : MonoBehaviour
 
             yield return new WaitForSeconds(ActiveTime);  //대기시간동안 기다리기
         }
+    }
+
+    void ApplyBuff()
+    {
+        PlayerBuffManager buffManager = CharacterManager.Instance.Player.GetComponent<PlayerBuffManager>();
+        if (buffManager == null)
+        {
+            // PlayerBuffManager가 없으면 추가
+            buffManager = CharacterManager.Instance.Player.gameObject.AddComponent<PlayerBuffManager>();
+        }
+
+        BuffEffect buff = new BuffEffect
+        {
+            buffType = buffType,
+            value = buffValue,
+            description = $"{buildingName} 효과: 체력 회복 +{buffValue}/초"
+        };
+
+        buffManager.AddBuff(buff);
+        Debug.Log($"버프 적용: {buff.description}");
     }
 }
