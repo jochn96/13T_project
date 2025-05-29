@@ -42,18 +42,18 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     public event Action onTakeDamage;
     private void Update()
     {
-        hunger.Subject(hunger.passiveValue * Time.deltaTime);
-        water.Subject(water.passiveValue * Time.deltaTime);
+        //hunger.Subject(hunger.passiveValue * Time.deltaTime);
+        //water.Subject(water.passiveValue * Time.deltaTime);
 
  
-        if(hunger.curValue < 0f)
-        {
-            health.Subject(noHungerHealthDecay * Time.deltaTime);
-        }
-        if(health.curValue < 0f)
-        {
-            Die();
-        }
+        //if(hunger.curValue < 0f)
+        //{
+        //    health.Subject(noHungerHealthDecay * Time.deltaTime);
+        //}
+        //if(health.curValue < 0f)
+        //{
+        //    Die();
+        //}
     }
 
     //private void OnTriggerEnter(Collider other)

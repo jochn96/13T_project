@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: b8400456e50d97a49a6d7e6a317e6dbd
+<<<<<<<< HEAD:Assets/Scenes/Chan.unity.meta
+guid: 73a353a114c82a341b16d1d73a259a9b
 DefaultImporter:
+========
+guid: fa5fda3452e22a94687196f58483fc30
+PrefabImporter:
+>>>>>>>> Feat/enemy:Assets/Prefabs/Enemy/EnemySpawner.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

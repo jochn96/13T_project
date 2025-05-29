@@ -2,93 +2,267 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SpawnZone
+{
+    public string zoneName;
+    public Transform[] spawnPoints;
+    public float spawnRadius = 5f;
+    public int maxEnemiesInZone = 3;
+    [Range(0f, 1f)] public float spawnChance = 0.8f;
+}
+
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public int poolSize = 10;
-    public Transform[] spawnPoints;
-    private List<GameObject> enemyPool = new List<GameObject>();
+    [Header("Pool Settings")]
+    public string enemyPoolName = "Enemy";
 
-    [Header("DayNight Cycle Reference")]
+    [Header("Day/Night Cycle")]
     public DayNightCycle dayNightCycle;
+    [Range(0f, 1f)] public float nightStartTime = 0.7f;
+    [Range(0f, 1f)] public float nightEndTime = 0.15f;
 
-    public float spawnDelay = 0.5f; // 한 마리씩 스폰 간격
+    [Header("Spawn Settings")]
+    public List<SpawnZone> spawnZones = new List<SpawnZone>();
+    public float spawnInterval = 2f;
+    public float despawnCheckInterval = 1f;
+
+    //[Header("Player Distance Check")]
+    public Transform player;
+    //public float minDistanceFromPlayer = 10f;
+    //public float maxDistanceFromPlayer = 50f;
 
     private bool isNight = false;
+    private bool wasNight = false;
+    private List<GameObject> activeEnemies = new List<GameObject>();
+    private Coroutine spawnCoroutine;
+    private Coroutine despawnCoroutine;
 
     void Start()
     {
-        for (int i = 0; i < poolSize; i++)
+        if (player == null)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
-            enemy.SetActive(false);
-            enemyPool.Add(enemy);
+            GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+            if (playerGO != null)
+                player = playerGO.transform;
         }
 
-        StartCoroutine(CheckDayNightCycle());
+        StartCoroutine(MonitorDayNightCycle());
     }
 
-    IEnumerator CheckDayNightCycle()
+    IEnumerator MonitorDayNightCycle()
     {
         while (true)
         {
-            // 밤 시간대: 0.75 ~ 1.0 또는 0.0 ~ 0.25
-            bool nowNight = (dayNightCycle.time >= 0.75f || dayNightCycle.time <= 0.25f);
+            isNight = (dayNightCycle.time >= nightStartTime || dayNightCycle.time <= nightEndTime);
 
-            if (nowNight && !isNight)
+            if (isNight && !wasNight)
             {
-                isNight = true;
-                StartCoroutine(SpawnEnemiesSequentially());
+                OnNightStart();
             }
-            else if (!nowNight && isNight)
+            else if (!isNight && wasNight)
             {
-                isNight = false;
-                KillAllEnemies();
+                OnDayStart();
             }
 
-            yield return new WaitForSeconds(1f); // 1초마다 확인
+            wasNight = isNight;
+            yield return new WaitForSeconds(1f);
         }
     }
 
-    IEnumerator SpawnEnemiesSequentially()
+    void OnNightStart()
     {
-        foreach (Transform point in spawnPoints)
+        if (spawnCoroutine != null)
+            StopCoroutine(spawnCoroutine);
+        if (despawnCoroutine != null)
+            StopCoroutine(despawnCoroutine);
+
+        spawnCoroutine = StartCoroutine(SpawnEnemiesRoutine());
+        despawnCoroutine = StartCoroutine(ManageActiveEnemies());
+    }
+
+    void OnDayStart()
+    {
+        Debug.Log("낮이 시작됨 - 모든 몬스터 제거");
+
+        if (spawnCoroutine != null)
         {
-            GameObject enemy = GetPooledEnemy();
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+        if (despawnCoroutine != null)
+        {
+            StopCoroutine(despawnCoroutine);
+            despawnCoroutine = null;
+        }
+
+        DespawnAllEnemies();
+    }
+
+    IEnumerator SpawnEnemiesRoutine()
+    {
+        while (isNight)
+        {
+            foreach (SpawnZone zone in spawnZones)
+            {
+                if (ShouldSpawnInZone(zone))
+                {
+                    SpawnEnemyInZone(zone);
+                }
+            }
+
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    bool ShouldSpawnInZone(SpawnZone zone)
+    {
+        int enemiesInZone = GetEnemiesInZone(zone);
+
+        if (enemiesInZone >= zone.maxEnemiesInZone)
+            return false;
+
+        return Random.value <= zone.spawnChance;
+    }
+
+    int GetEnemiesInZone(SpawnZone zone)
+    {
+        int count = 0;
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null && enemy.activeInHierarchy)
+            {
+                foreach (Transform spawnPoint in zone.spawnPoints)
+                {
+                    if (Vector3.Distance(enemy.transform.position, spawnPoint.position) <= zone.spawnRadius)
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    void SpawnEnemyInZone(SpawnZone zone)
+    {
+        if (ObjectPoolManager.Instance == null || zone.spawnPoints.Length == 0)
+            return;
+
+        Transform spawnPoint = zone.spawnPoints[Random.Range(0, zone.spawnPoints.Length)];
+        Vector3 spawnPosition = GetValidSpawnPosition(spawnPoint.position, zone.spawnRadius);
+
+        if (spawnPosition != Vector3.zero)
+        {
+            GameObject enemy = ObjectPoolManager.Instance.SpawnFromPool(
+                enemyPoolName,
+                spawnPosition,
+                Quaternion.identity
+            );
+
             if (enemy != null)
             {
-                Vector3 offset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                enemy.transform.position = point.position + offset;
-                enemy.transform.rotation = point.rotation;
-                enemy.SetActive(true);
+                activeEnemies.Add(enemy);
+
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                if (enemyScript != null && player != null)
+                {
+                    enemyScript.player = player;
+                }
+
+                Debug.Log($"몬스터가 {zone.zoneName}에 스폰됨: {spawnPosition}");
             }
-
-            yield return new WaitForSeconds(spawnDelay); // 다음 적 스폰까지 텀
         }
     }
 
-    GameObject GetPooledEnemy()
+    Vector3 GetValidSpawnPosition(Vector3 centerPosition, float radius)
     {
-        foreach (var enemy in enemyPool)
-        {
-            if (!enemy.activeInHierarchy)
-                return enemy;
-        }
-        return null;
+        // 단순 랜덤 위치 반환 (거리 제한 없음)
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-radius, radius),
+            0,
+            Random.Range(-radius, radius)
+        );
+
+        return centerPosition + randomOffset;
     }
 
-    void KillAllEnemies()
+    IEnumerator ManageActiveEnemies()
     {
-        foreach (var enemy in enemyPool)
+        while (isNight)
         {
-            if (enemy.activeInHierarchy)
+            activeEnemies.RemoveAll(enemy => enemy == null || !enemy.activeInHierarchy);
+
+            yield return new WaitForSeconds(despawnCheckInterval);
+        }
+    }
+
+    void DespawnAllEnemies()
+    {
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null && enemy.activeInHierarchy)
             {
                 Enemy enemyScript = enemy.GetComponent<Enemy>();
                 if (enemyScript != null)
                 {
-                    enemyScript.Die(); 
+                    enemyScript.Die();
+                }
+                else
+                {
+                    ReturnEnemyToPool(enemy);
                 }
             }
         }
+
+        activeEnemies.Clear();
+    }
+
+    void ReturnEnemyToPool(GameObject enemy)
+    {
+        if (ObjectPoolManager.Instance != null)
+        {
+            ObjectPoolManager.Instance.ReturnToPool(enemyPoolName, enemy);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        foreach (SpawnZone zone in spawnZones)
+        {
+            if (zone.spawnPoints != null)
+            {
+                Gizmos.color = Color.yellow;
+                foreach (Transform point in zone.spawnPoints)
+                {
+                    if (point != null)
+                    {
+                        Gizmos.DrawWireSphere(point.position, zone.spawnRadius);
+                        Gizmos.DrawWireCube(point.position, Vector3.one * 0.5f);
+                    }
+                }
+            }
+        }
+
+        // 플레이어 거리 시각화 제거
+    }
+
+    void OnGUI()
+    {
+        if (!Application.isPlaying) return;
+
+        GUILayout.BeginArea(new Rect(10, 10, 300, 200));
+        GUILayout.Label($"현재 시간: {dayNightCycle.time:F2}");
+        GUILayout.Label($"밤 여부: {isNight}");
+        GUILayout.Label($"활성 몬스터 수: {activeEnemies.Count}");
+
+        if (ObjectPoolManager.Instance != null)
+        {
+            GUILayout.Label($"풀에서 활성화된 적: {ObjectPoolManager.Instance.GetActiveCount(enemyPoolName)}");
+            GUILayout.Label($"풀 전체 크기: {ObjectPoolManager.Instance.GetPoolSize(enemyPoolName)}");
+        }
+
+        GUILayout.EndArea();
     }
 }
