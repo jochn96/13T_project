@@ -12,10 +12,13 @@ public class NPCAreaController : MonoBehaviour
             canvasGameobject.SetActive(true);
         }
         
-       /* else 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            canvasGameobject.SetActive(false);
-        }*/ 
-       // NPC 거리 떨어졌을 때 대화창 사라지기 미구현
+            canvasGameobject.SetActive(false); // 플레이어와 거리가 멀어질 시 대화창 삭제
+        }
     }
 }

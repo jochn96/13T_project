@@ -55,7 +55,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         //{
         //    Die();
         //}
-    }
+    } */ 
 
 
     //private void OnTriggerEnter(Collider other)
