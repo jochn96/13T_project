@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7544893950667659020
+--- !u!1 &277287142045989513
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1060725414781220711}
-  - component: {fileID: 6841319902566293137}
-  - component: {fileID: 1626450928760649082}
-  - component: {fileID: 5315925426350902077}
-  - component: {fileID: 2742298196596646448}
+  - component: {fileID: 653243036109097357}
+  m_Layer: 7
+  m_Name: arrowSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653243036109097357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277287142045989513}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.00075, z: 0.00018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5699735249604737748}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &5788133796897745494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5699735249604737748}
+  - component: {fileID: 2180065623399573734}
+  - component: {fileID: 5649510421152297993}
+  - component: {fileID: 4089593821936167567}
+  - component: {fileID: 6054929040111108282}
   m_Layer: 7
   m_Name: Equip_wood_Bow
   m_TagString: Untagged
@@ -20,36 +51,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1060725414781220711
+--- !u!4 &5699735249604737748
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544893950667659020}
+  m_GameObject: {fileID: 5788133796897745494}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.054188877, y: -0.6441759, z: -0.045835353, w: 0.76157737}
+  m_LocalRotation: {x: -0.05418969, y: -0.6441756, z: -0.045836005, w: 0.76157755}
   m_LocalPosition: {x: 0.415, y: -0.207, z: 1.283}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 653243036109097357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -8.14, y: -80.452, z: 0}
---- !u!33 &6841319902566293137
+--- !u!33 &2180065623399573734
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544893950667659020}
+  m_GameObject: {fileID: 5788133796897745494}
   m_Mesh: {fileID: 8777139954052135742, guid: 3e79c353181a40844a9ace263f6e6fea, type: 3}
---- !u!23 &1626450928760649082
+--- !u!23 &5649510421152297993
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544893950667659020}
+  m_GameObject: {fileID: 5788133796897745494}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,14 +117,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &5315925426350902077
+--- !u!95 &4089593821936167567
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544893950667659020}
+  m_GameObject: {fileID: 5788133796897745494}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 308fdfb2d529ef4449d5dbf60d89c73e, type: 2}
@@ -106,21 +138,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2742298196596646448
+--- !u!114 &6054929040111108282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544893950667659020}
+  m_GameObject: {fileID: 5788133796897745494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4717cf4bd73813d4fae4a52ccc8e435b, type: 3}
+  m_Script: {fileID: 11500000, guid: 887638193cff1f3458113155cc18ce6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 0
-  attackDistance: 0
-  useStamina: 0
-  doesGatherResources: 0
-  doesDealDamage: 0
-  damage: 0
+  ArrowPrefab: {fileID: 6547354802806682731, guid: b7778a7e0fa018a4b819cf2eb8e8bdf3, type: 3}
+  MaximalShootRange: 300
+  MinimalShootRange: 0
+  SpreadFactor: 0
+  SpreadFactorDistanceImpact: 0.4
+  HeightMultiplier: 0.1
+  ArrowFlightSpeed: 5
+  ArrowLifeTime: 3
+  arrowSpawnPoint: {fileID: 653243036109097357}
+  animator: {fileID: 4089593821936167567}

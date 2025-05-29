@@ -1508,6 +1508,7 @@ MonoBehaviour:
   detectDistance: 5
   attackDistance: 2
   attackCooldown: 2
+  poolName: "\uC6D0\uD558\uB294 \uC774\uB984"
 --- !u!114 &3803439341440612221
 MonoBehaviour:
   m_ObjectHideFlags: 0
