@@ -5,10 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - DialogTag
-
   - Bullet
+  - Projectile
   - Enemy
-
   layers:
   - Default
   - TransparentFX
@@ -16,12 +15,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - Interactable
-  - Equip
-  - Resource
-  - Ground
-  - Building
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
