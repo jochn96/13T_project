@@ -47,5 +47,5 @@ MonoBehaviour:
   poolDataList:
   - poolName: wave1
     prefab: {fileID: 6878530233942535495, guid: a693d5e351c121142af60068c3dd3c33, type: 3}
-    poolSize: 6
+    poolSize: 20
     parent: {fileID: 0}

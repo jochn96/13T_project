@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - DialogTag
-  - Player 01
+
+  - Bullet
+  - Enemy
+
   layers:
   - Default
   - TransparentFX
