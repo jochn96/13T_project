@@ -40,30 +40,39 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     //}
     
     public event Action onTakeDamage;
-    private void Update()
+    /*private void Update()
     {
+<<<<<<< HEAD
         if (IsPlayerMoving())
         {
             hunger.Subject(hunger.passiveValue * Time.deltaTime);
             water.Subject(water.passiveValue * Time.deltaTime);
         }
+=======
+        //hunger.Subject(hunger.passiveValue * Time.deltaTime);
+        //water.Subject(water.passiveValue * Time.deltaTime);
+>>>>>>> dev
 
  
-        if(hunger.curValue < 0f)
-        {
-            health.Subject(noHungerHealthDecay * Time.deltaTime);
-        }
-        if(health.curValue < 0f)
-        {
-            Die();
-        }
+
+        //if(hunger.curValue < 0f)
+        //{
+        //    health.Subject(noHungerHealthDecay * Time.deltaTime);
+        //}
+        //if(health.curValue < 0f)
+        //{
+        //    Die();
+        //}
     }
 
+<<<<<<< HEAD
     private bool IsPlayerMoving()
     {
         Vector3 velocity = CharacterManager.Instance.Player.controller.GetMoveDirection();
         return velocity.magnitude > 0.1f; // 이동 중이면 true
     }
+=======
+>>>>>>> dev
 
     //private void OnTriggerEnter(Collider other)
     //{
@@ -72,7 +81,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     //    {
     //        TakePhysiclaDamage(10); //임시 고정 대미지
     //    }
-    //}
+    //} */
 
     public void Heal(float amout)
     {
