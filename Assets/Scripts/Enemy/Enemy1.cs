@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class Enemy : MonoBehaviour
     public EnemyAttack hitbox;
 
     [Header("Enemy Settings")]
-    public float moveSpeed = 2f;  
+    public float moveSpeed = 2f;
     public float rotationSpeed = 100f;
     public Animator animator;
 
     [Header("Player Settings")]
     public Transform player;
-    public float detectDistance = 5f;   //플레이어 감지범위 현재안쓰는중
-    public float attackDistance = 2f;   //플레이어 공격범위
+    public float detectDistance = 5f;
+    public float attackDistance = 2f;
 
     [Header("Attack Settings")]
     public float attackCooldown = 1f;
@@ -27,14 +28,17 @@ public class Enemy : MonoBehaviour
 
     private State currentState = State.Detect;
     private bool isDead = false;
-
     private bool isAttacking = false;
-    private Vector3 targetDirection;
+
+    private NavMeshAgent agent;
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+
         ChangeState(State.Detect);
-        isAttacking = false ;
+        isAttacking = false;
     }
 
     void Update()
@@ -57,29 +61,15 @@ public class Enemy : MonoBehaviour
 
     void Detect()
     {
-     
-        if(isAttacking) return;
-        
-        if (player == null) return;
+        if (isAttacking || player == null) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // 플레이어를 향해 이동
-        //MoveTowards(player.position);        
-        targetDirection = (player.position - transform.position).normalized;
-        targetDirection.y = 0;
+        agent.isStopped = false;
+        agent.SetDestination(player.position);  //nav mesh로 플레이어 추적
 
-        // 이동 애니메이션 재생
-        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));  //에너미 스피드 조절
+        animator.SetFloat("Speed", agent.velocity.magnitude); // 속도에 따라 애니메이션
 
-        // 회전만 스크립트에서 처리
-        if (targetDirection != Vector3.zero)
-        {
-            Quaternion lookRot = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
-        }
-
-        // 공격 범위에 들어오면 공격 상태로 전환
         if (distance <= attackDistance)
         {
             ChangeState(State.Attack);
@@ -97,7 +87,8 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // 플레이어 방향으로 회전
+        // 이동 멈추고 회전
+        agent.isStopped = true;
         Vector3 dir = (player.position - transform.position).normalized;
         dir.y = 0;
         if (dir != Vector3.zero)
@@ -106,40 +97,13 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }
 
-        // 멈추기 
-        // animator.SetFloat("Speed", 0f);
-
         if (attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
             animator.SetTrigger("IsAttack");
             Debug.Log("공격!");
             isAttacking = false;
-
         }
-        //isAttacking= false;
-
-        
-    }
-
-    
-    
-
-    void MoveTowards(Vector3 target)
-    {
-        Vector3 dir = (target - transform.position).normalized;
-        dir.y = 0;
-
-        if (dir != Vector3.zero)
-        {
-            Quaternion lookRot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
-        }
-
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-
-        
-        
     }
 
     bool InRange(float range)
@@ -153,18 +117,18 @@ public class Enemy : MonoBehaviour
 
         if (newState == State.Attack)
         {
-            attackTimer = attackCooldown; // 공격 상태로 진입하면 즉시 공격 가능
+            attackTimer = attackCooldown;
         }
 
         currentState = newState;
     }
 
-    private void OnTriggerEnter(Collider other) // 화살 맞았을떄 
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet") && !isDead)
         {
-            Destroy(other.gameObject);  // 화살 제거
-            Die();  //에너미 사망 처리
+            Destroy(other.gameObject);
+            Die();
         }
     }
 
@@ -174,13 +138,14 @@ public class Enemy : MonoBehaviour
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // 사망 시 콜라이더 제거
+        if (agent != null)
+            agent.isStopped = true;
+
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
 
-        // ▶ Rigidbody 비활성화
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -188,12 +153,10 @@ public class Enemy : MonoBehaviour
             rb.useGravity = false;
         }
 
-
-        // 오브젝트 풀로 반환 (5초 후)
         StartCoroutine(ReturnToPoolAfterDelay(5f));
     }
 
-    private System.Collections.IEnumerator ReturnToPoolAfterDelay(float delay)
+    private IEnumerator ReturnToPoolAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -203,7 +166,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // 풀이 없으면 기존 방식으로 파괴
             Destroy(gameObject);
         }
     }
@@ -222,7 +184,6 @@ public class Enemy : MonoBehaviour
             col.enabled = true;
         }
 
-        // ▶ Rigidbody 활성화
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -230,8 +191,14 @@ public class Enemy : MonoBehaviour
             rb.useGravity = true;
         }
 
-        // 걷기 상태로 애니메이션 세팅
-        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));
+        if (agent == null)
+            agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.speed = moveSpeed;
+        }
 
         ChangeState(State.Detect);
     }
