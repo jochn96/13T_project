@@ -171,7 +171,7 @@ public class EnemySpawner : MonoBehaviour
                     enemyScript.player = player;
                 }
 
-                Debug.Log($"몬스터가 {zone.zoneName}에 스폰됨: {spawnPosition}");
+                //Debug.Log($"몬스터가 {zone.zoneName}에 스폰됨: {spawnPosition}");
             }
         }
     }
