@@ -12,9 +12,10 @@ public class NPCAreaController : MonoBehaviour
             canvasGameobject.SetActive(true);
         }
         
-        else 
+       /* else 
         {
             canvasGameobject.SetActive(false);
-        }
+        }*/ 
+       // NPC 거리 떨어졌을 때 대화창 사라지기 미구현
     }
 }
