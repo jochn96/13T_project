@@ -6509,6 +6509,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f82c54e7185b31f44ad47e1fcf5399b2, type: 3}
   - name: wood_gather
     clip: {fileID: 8300000, guid: fc59ebaa470040a4b809cf86bef8ccf0, type: 3}
+  - name: Player_jump
+    clip: {fileID: 8300000, guid: 75c9e73287eb4ac44821656dee18c5b5, type: 3}
+  - name: Player_walk
+    clip: {fileID: 8300000, guid: e84c0e15a5c18504cb30619584052107, type: 3}
+  - name: zombie_attack
+    clip: {fileID: 8300000, guid: 32e6e8d81086ec44abcadb8f3c036ff5, type: 3}
+  - name: zombie_walk
+    clip: {fileID: 8300000, guid: c0da229ce63dbec49809f37eead40b88, type: 3}
   sfxChannelCount: 6
 --- !u!4 &1829706408
 Transform:
@@ -11844,7 +11852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpPower: 200
+  jumpPower: 100
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295

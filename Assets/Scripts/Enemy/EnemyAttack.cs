@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public int damage = 10; // °ø°ÝÇÇÇØ
+    public int damage = 10; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private bool hasHit = false;
 
     public Collider hitCollider;
 
-    public void ResetHit() //¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ® È£Ãâ ÃÊ±âÈ­
+    public void ResetHit() //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ® È£ï¿½ï¿½ ï¿½Ê±ï¿½È­
     {
         if (hitCollider != null)
         {
@@ -28,16 +28,17 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasHit) return; // Áßº¹ Å¸°Ý ¹æÁö
+        if (hasHit) return; // ï¿½ßºï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         if (other.CompareTag("Player"))
         {
-            // ÇÃ·¹ÀÌ¾îÀÇ Condition ÄÄÆ÷³ÍÆ® Ã£±â
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Condition ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ã£ï¿½ï¿½
             PlayerCondition condition = other.GetComponent<PlayerCondition>();
             if (condition != null)
             {
-                condition.TakePhysiclaDamage(damage); // °ø°ÝÇÇÇØ ÀÔÈ÷±â
-                Debug.Log("ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ ÀÔÈû: " + damage);
+                condition.TakePhysiclaDamage(damage); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + damage);
+                SoundManager.Instance.PlaySFX("zombie_attack");
             }
 
             hasHit = true;
