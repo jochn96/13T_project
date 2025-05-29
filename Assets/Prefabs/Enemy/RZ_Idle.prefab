@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitbox: {fileID: 6015357301645229572}
-  moveSpeed: 6
+  moveSpeed: 1
   rotationSpeed: 100
   animator: {fileID: 2074943007581156538}
   player: {fileID: 3842403464488670448}
@@ -665,7 +665,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 100

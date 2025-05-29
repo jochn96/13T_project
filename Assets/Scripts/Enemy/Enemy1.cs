@@ -125,10 +125,17 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet") && !isDead)
+        if (!isDead)
         {
-            Destroy(other.gameObject);
-            Die();
+            if (other.CompareTag("Bullet")) //화살은 파괴
+            {
+                Destroy(other.gameObject);
+                Die();
+            }
+            else if (other.CompareTag("Sword")) // 칼은 파괴방지
+            {
+                Die(); 
+            }
         }
     }
 
