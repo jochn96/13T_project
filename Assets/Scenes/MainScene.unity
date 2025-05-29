@@ -1693,7 +1693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &496209205
 Transform:
   m_ObjectHideFlags: 0
@@ -3674,11 +3674,6 @@ MonoBehaviour:
   equipButton: {fileID: 1373451641}
   unequipButton: {fileID: 847331192}
   dropButton: {fileID: 1607113560}
-  startingItems:
-  - itemData: {fileID: 11400000, guid: 94d25abe11a67574daf2a2578168f4a1, type: 2}
-    quantity: 1
-  - itemData: {fileID: 11400000, guid: 951572757e4699542a7e54d34dec2cba, type: 2}
-    quantity: 50
 --- !u!1 &1042605670
 GameObject:
   m_ObjectHideFlags: 0
@@ -7161,7 +7156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2073124389
 Transform:
   m_ObjectHideFlags: 0
