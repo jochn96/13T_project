@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -32,8 +32,8 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸ğµç ¿ÀºêÁ§Æ® Ç®À» ÃÊ±âÈ­ÇÕ´Ï´Ù.
-    /// poolDataList¿¡ ¼³Á¤µÈ °¢ Ç®¿¡ ´ëÇØ ¹Ì¸® ¿ÀºêÁ§Æ®µéÀ» »ı¼ºÇÏ¿© Queue¿¡ ÀúÀåÇÕ´Ï´Ù.
+    /// ëª¨ë“  ì˜¤ë¸Œì íŠ¸ í’€ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+    /// poolDataListì— ì„¤ì •ëœ ê° í’€ì— ëŒ€í•´ ë¯¸ë¦¬ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ìƒì„±í•˜ì—¬ Queueì— ì €ì¥í•©ë‹ˆë‹¤.
     /// </summary>
     private void InitializePools()
     {
@@ -61,12 +61,12 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿Í È°¼ºÈ­ÇÏ°í À§Ä¡¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì™€ í™œì„±í™”í•˜ê³  ìœ„ì¹˜ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">»ç¿ëÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <param name="position">½ºÆùµÉ À§Ä¡</param>
-    /// <param name="rotation">½ºÆùµÉ È¸Àü°ª</param>
-    /// <returns>È°¼ºÈ­µÈ GameObject, Ç®ÀÌ ºñ¾îÀÖ°Å³ª Á¸ÀçÇÏÁö ¾ÊÀ¸¸é null</returns>
+    /// <param name="poolName">ì‚¬ìš©í•  í’€ì˜ ì´ë¦„</param>
+    /// <param name="position">ìŠ¤í°ë  ìœ„ì¹˜</param>
+    /// <param name="rotation">ìŠ¤í°ë  íšŒì „ê°’</param>
+    /// <returns>í™œì„±í™”ëœ GameObject, í’€ì´ ë¹„ì–´ìˆê±°ë‚˜ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ null</returns>
     public GameObject SpawnFromPool(string poolName, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(poolName))
@@ -92,10 +92,10 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// »ç¿ëÀÌ ³¡³­ ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­ÇÏ°í Ç®·Î ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì‚¬ìš©ì´ ëë‚œ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹„í™œì„±í™”í•˜ê³  í’€ë¡œ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">¹İÈ¯ÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <param name="objectToReturn">Ç®·Î ¹İÈ¯ÇÒ GameObject</param>
+    /// <param name="poolName">ë°˜í™˜í•  í’€ì˜ ì´ë¦„</param>
+    /// <param name="objectToReturn">í’€ë¡œ ë°˜í™˜í•  GameObject</param>
     public void ReturnToPool(string poolName, GameObject objectToReturn)
     {
         if (!poolDictionary.ContainsKey(poolName))
@@ -109,10 +109,10 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®ÀÇ ¸ğµç È°¼ºÈ­µÈ ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ Ç®·Î ¹İÈ¯ÇÕ´Ï´Ù.
-    /// ÁÖ·Î °ÔÀÓ Á¾·á³ª ¾À ÀüÈ¯ ½Ã Á¤¸®¿ëÀ¸·Î »ç¿ëµË´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì˜ ëª¨ë“  í™œì„±í™”ëœ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì„œ í’€ë¡œ ë°˜í™˜í•©ë‹ˆë‹¤.
+    /// ì£¼ë¡œ ê²Œì„ ì¢…ë£Œë‚˜ ì”¬ ì „í™˜ ì‹œ ì •ë¦¬ìš©ìœ¼ë¡œ ì‚¬ìš©ë©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">¸ğµç ¿ÀºêÁ§Æ®¸¦ ¹İÈ¯ÇÒ Ç®ÀÇ ÀÌ¸§</param>
+    /// <param name="poolName">ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë¥¼ ë°˜í™˜í•  í’€ì˜ ì´ë¦„</param>
     public void ReturnAllToPool(string poolName)
     {
         if (!poolDictionary.ContainsKey(poolName))
@@ -121,7 +121,7 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
 
-        // ÇöÀç È°¼ºÈ­µÈ ¸ğµç ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ Ç®·Î ¹İÈ¯
+        // í˜„ì¬ í™œì„±í™”ëœ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì„œ í’€ë¡œ ë°˜í™˜
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         PoolData poolData = poolDataList.Find(data => data.poolName == poolName);
 
@@ -138,10 +138,10 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®¿¡¼­ ÇöÀç È°¼ºÈ­µÇ¾î »ç¿ë ÁßÀÎ ¿ÀºêÁ§Æ®ÀÇ °³¼ö¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì—ì„œ í˜„ì¬ í™œì„±í™”ë˜ì–´ ì‚¬ìš© ì¤‘ì¸ ì˜¤ë¸Œì íŠ¸ì˜ ê°œìˆ˜ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">È®ÀÎÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <returns>È°¼ºÈ­µÈ ¿ÀºêÁ§Æ® °³¼ö</returns>
+    /// <param name="poolName">í™•ì¸í•  í’€ì˜ ì´ë¦„</param>
+    /// <returns>í™œì„±í™”ëœ ì˜¤ë¸Œì íŠ¸ ê°œìˆ˜</returns>
     public int GetActiveCount(string poolName)
     {
         if (!poolDictionary.ContainsKey(poolName))
@@ -154,10 +154,10 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®ÀÇ ÀüÃ¼ Å©±â(ÃÖ´ë ¿ÀºêÁ§Æ® °³¼ö)¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì˜ ì „ì²´ í¬ê¸°(ìµœëŒ€ ì˜¤ë¸Œì íŠ¸ ê°œìˆ˜)ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">È®ÀÎÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <returns>Ç®ÀÇ ÀüÃ¼ Å©±â, Ç®ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é 0</returns>
+    /// <param name="poolName">í™•ì¸í•  í’€ì˜ ì´ë¦„</param>
+    /// <returns>í’€ì˜ ì „ì²´ í¬ê¸°, í’€ì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ 0</returns>
     public int GetPoolSize(string poolName)
     {
         PoolData poolData = poolDataList.Find(data => data.poolName == poolName);
@@ -165,10 +165,10 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®¿¡¼­ »ç¿ë °¡´ÉÇÑ(ºñÈ°¼ºÈ­µÈ) ¿ÀºêÁ§Æ®ÀÇ °³¼ö¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì—ì„œ ì‚¬ìš© ê°€ëŠ¥í•œ(ë¹„í™œì„±í™”ëœ) ì˜¤ë¸Œì íŠ¸ì˜ ê°œìˆ˜ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">È®ÀÎÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <returns>»ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ® °³¼ö</returns>
+    /// <param name="poolName">í™•ì¸í•  í’€ì˜ ì´ë¦„</param>
+    /// <returns>ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ ê°œìˆ˜</returns>
     public int GetAvailableCount(string poolName)
     {
         if (!poolDictionary.ContainsKey(poolName))
@@ -178,19 +178,19 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ Ç®ÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ í’€ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="poolName">È®ÀÎÇÒ Ç®ÀÇ ÀÌ¸§</param>
-    /// <returns>Ç® Á¸Àç ¿©ºÎ</returns>
+    /// <param name="poolName">í™•ì¸í•  í’€ì˜ ì´ë¦„</param>
+    /// <returns>í’€ ì¡´ì¬ ì—¬ë¶€</returns>
     public bool PoolExists(string poolName)
     {
         return poolDictionary.ContainsKey(poolName);
     }
 
     /// <summary>
-    /// ¸ğµç Ç®ÀÇ ÀÌ¸§ ¸ñ·ÏÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ëª¨ë“  í’€ì˜ ì´ë¦„ ëª©ë¡ì„ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>µî·ÏµÈ ¸ğµç Ç® ÀÌ¸§ÀÇ ¹è¿­</returns>
+    /// <returns>ë“±ë¡ëœ ëª¨ë“  í’€ ì´ë¦„ì˜ ë°°ì—´</returns>
     public string[] GetAllPoolNames()
     {
         string[] poolNames = new string[poolDictionary.Keys.Count];

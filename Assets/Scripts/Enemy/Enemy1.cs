@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,15 +15,15 @@ public class Enemy : MonoBehaviour
 
     [Header("Player Settings")]
     public Transform player;
-    public float detectDistance = 5f;   //ÇÃ·¹ÀÌ¾î °¨Áö¹üÀ§ ÇöÀç¾È¾²´ÂÁß
-    public float attackDistance = 2f;   //ÇÃ·¹ÀÌ¾î °ø°İ¹üÀ§
+    public float detectDistance = 5f;   //í”Œë ˆì´ì–´ ê°ì§€ë²”ìœ„ í˜„ì¬ì•ˆì“°ëŠ”ì¤‘
+    public float attackDistance = 2f;   //í”Œë ˆì´ì–´ ê³µê²©ë²”ìœ„
 
     [Header("Attack Settings")]
     public float attackCooldown = 1f;
     private float attackTimer = 0f;
 
-    [Header("¿ÀºêÁ§Æ® ¼³Á¤")]
-    public string poolName = "¿øÇÏ´Â ÀÌ¸§";
+    [Header("ì˜¤ë¸Œì íŠ¸ ì„¤ì •")]
+    public string poolName = "ì›í•˜ëŠ” ì´ë¦„";
 
     private State currentState = State.Detect;
     private bool isDead = false;
@@ -64,22 +64,22 @@ public class Enemy : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ÀÌµ¿
+        // í”Œë ˆì´ì–´ë¥¼ í–¥í•´ ì´ë™
         //MoveTowards(player.position);        
         targetDirection = (player.position - transform.position).normalized;
         targetDirection.y = 0;
 
-        // ÀÌµ¿ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
-        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));  //¿¡³Ê¹Ì ½ºÇÇµå Á¶Àı
+        // ì´ë™ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));  //ì—ë„ˆë¯¸ ìŠ¤í”¼ë“œ ì¡°ì ˆ
 
-        // È¸Àü¸¸ ½ºÅ©¸³Æ®¿¡¼­ Ã³¸®
+        // íšŒì „ë§Œ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì²˜ë¦¬
         if (targetDirection != Vector3.zero)
         {
             Quaternion lookRot = Quaternion.LookRotation(targetDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }
 
-        // °ø°İ ¹üÀ§¿¡ µé¾î¿À¸é °ø°İ »óÅÂ·Î ÀüÈ¯
+        // ê³µê²© ë²”ìœ„ì— ë“¤ì–´ì˜¤ë©´ ê³µê²© ìƒíƒœë¡œ ì „í™˜
         if (distance <= attackDistance)
         {
             ChangeState(State.Attack);
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î È¸Àü
+        // í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ íšŒì „
         Vector3 dir = (player.position - transform.position).normalized;
         dir.y = 0;
         if (dir != Vector3.zero)
@@ -106,14 +106,14 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }
 
-        // ¸ØÃß±â 
+        // ë©ˆì¶”ê¸° 
         // animator.SetFloat("Speed", 0f);
 
         if (attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
             animator.SetTrigger("IsAttack");
-            Debug.Log("°ø°İ!");
+            Debug.Log("ê³µê²©!");
             isAttacking = false;
 
         }
@@ -153,18 +153,18 @@ public class Enemy : MonoBehaviour
 
         if (newState == State.Attack)
         {
-            attackTimer = attackCooldown; // °ø°İ »óÅÂ·Î ÁøÀÔÇÏ¸é Áï½Ã °ø°İ °¡´É
+            attackTimer = attackCooldown; // ê³µê²© ìƒíƒœë¡œ ì§„ì…í•˜ë©´ ì¦‰ì‹œ ê³µê²© ê°€ëŠ¥
         }
 
         currentState = newState;
     }
 
-    private void OnTriggerEnter(Collider other) // È­»ì ¸Â¾ÒÀ»‹š 
+    private void OnTriggerEnter(Collider other) // í™”ì‚´ ë§ì•˜ì„ë–„ 
     {
         if (other.CompareTag("Bullet") && !isDead)
         {
-            Destroy(other.gameObject);  // È­»ì Á¦°Å
-            Die();  //¿¡³Ê¹Ì »ç¸Á Ã³¸®
+            Destroy(other.gameObject);  // í™”ì‚´ ì œê±°
+            Die();  //ì—ë„ˆë¯¸ ì‚¬ë§ ì²˜ë¦¬
         }
     }
 
@@ -174,13 +174,13 @@ public class Enemy : MonoBehaviour
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // »ç¸Á ½Ã Äİ¶óÀÌ´õ Á¦°Å
+        // ì‚¬ë§ ì‹œ ì½œë¼ì´ë” ì œê±°
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
 
-        // ¢º Rigidbody ºñÈ°¼ºÈ­
+        // â–¶ Rigidbody ë¹„í™œì„±í™”
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -189,7 +189,7 @@ public class Enemy : MonoBehaviour
         }
 
 
-        // ¿ÀºêÁ§Æ® Ç®·Î ¹İÈ¯ (5ÃÊ ÈÄ)
+        // ì˜¤ë¸Œì íŠ¸ í’€ë¡œ ë°˜í™˜ (5ì´ˆ í›„)
         StartCoroutine(ReturnToPoolAfterDelay(5f));
     }
 
@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // Ç®ÀÌ ¾øÀ¸¸é ±âÁ¸ ¹æ½ÄÀ¸·Î ÆÄ±«
+            // í’€ì´ ì—†ìœ¼ë©´ ê¸°ì¡´ ë°©ì‹ìœ¼ë¡œ íŒŒê´´
             Destroy(gameObject);
         }
     }
@@ -222,7 +222,7 @@ public class Enemy : MonoBehaviour
             col.enabled = true;
         }
 
-        // ¢º Rigidbody È°¼ºÈ­
+        // â–¶ Rigidbody í™œì„±í™”
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -230,7 +230,7 @@ public class Enemy : MonoBehaviour
             rb.useGravity = true;
         }
 
-        // °È±â »óÅÂ·Î ¾Ö´Ï¸ŞÀÌ¼Ç ¼¼ÆÃ
+        // ê±·ê¸° ìƒíƒœë¡œ ì• ë‹ˆë©”ì´ì…˜ ì„¸íŒ…
         animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));
 
         ChangeState(State.Detect);
