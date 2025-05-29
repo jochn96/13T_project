@@ -432,6 +432,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22694963-c823-4123-a43d-3d89bbdd2cd7
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 830d1b6711cfd754ea39f79c3292826f, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 72b2d53f-52a4-4ac3-b441-9df434ce14b3
+    m_ActionName: Player/Talk[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -949,10 +965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce5b6b322a7f6a4cb223baccd6a1c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: b3cf2bba8c4020a439faebc8bd41935c, type: 2}
-  quiiantityPerHit: 1
-  capacy: 5
-  resource: {fileID: 0}
+  type: 0
+  amountPerHit: 1
+  capacity: 0
 --- !u!1001 &239381417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7159,14 +7174,6 @@ PrefabInstance:
     - target: {fileID: 2495014035263338637, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5166021384575540396, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 7465077885078671216, guid: 588652db6927bc64893ca0fac46e8e28, type: 3}
-      propertyPath: m_TagString
-      value: DialogTag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

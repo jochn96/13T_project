@@ -27,10 +27,10 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 2f;
     public float despawnCheckInterval = 1f;
 
-    [Header("Player Distance Check")]
+    //[Header("Player Distance Check")]
     public Transform player;
-    public float minDistanceFromPlayer = 10f;
-    public float maxDistanceFromPlayer = 50f;
+    //public float minDistanceFromPlayer = 10f;
+    //public float maxDistanceFromPlayer = 50f;
 
     private bool isNight = false;
     private bool wasNight = false;
@@ -40,7 +40,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        // 플레이어를 자동으로 찾음
         if (player == null)
         {
             GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
@@ -55,7 +54,6 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            // 밤 시간 체크 (예: 0.75 ~ 1.0 또는 0.0 ~ 0.25)
             isNight = (dayNightCycle.time >= nightStartTime || dayNightCycle.time <= nightEndTime);
 
             if (isNight && !wasNight)
@@ -72,10 +70,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void OnNightStart() //밤 되면 몬스터 스폰 시작
+    void OnNightStart()
     {
-       
-
         if (spawnCoroutine != null)
             StopCoroutine(spawnCoroutine);
         if (despawnCoroutine != null)
@@ -121,14 +117,11 @@ public class EnemySpawner : MonoBehaviour
 
     bool ShouldSpawnInZone(SpawnZone zone)
     {
-        // 해당 존에 있는 활성 적들 수 체크
         int enemiesInZone = GetEnemiesInZone(zone);
 
-        // 최대 수에 도달했으면 스폰하지 않음
         if (enemiesInZone >= zone.maxEnemiesInZone)
             return false;
 
-        // 확률적으로 스폰 결정
         return Random.value <= zone.spawnChance;
     }
 
@@ -157,10 +150,7 @@ public class EnemySpawner : MonoBehaviour
         if (ObjectPoolManager.Instance == null || zone.spawnPoints.Length == 0)
             return;
 
-        // 랜덤 스폰 포인트 선택
         Transform spawnPoint = zone.spawnPoints[Random.Range(0, zone.spawnPoints.Length)];
-
-        // 플레이어와의 거리 체크를 위한 랜덤 위치 생성
         Vector3 spawnPosition = GetValidSpawnPosition(spawnPoint.position, zone.spawnRadius);
 
         if (spawnPosition != Vector3.zero)
@@ -175,7 +165,6 @@ public class EnemySpawner : MonoBehaviour
             {
                 activeEnemies.Add(enemy);
 
-                // 적 스크립트에 플레이어 참조 설정
                 Enemy enemyScript = enemy.GetComponent<Enemy>();
                 if (enemyScript != null && player != null)
                 {
@@ -189,63 +178,21 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 GetValidSpawnPosition(Vector3 centerPosition, float radius)
     {
-        int attempts = 10; // 최대 시도 횟수
+        // 단순 랜덤 위치 반환 (거리 제한 없음)
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-radius, radius),
+            0,
+            Random.Range(-radius, radius)
+        );
 
-        for (int i = 0; i < attempts; i++)
-        {
-            // 스폰 포인트 주변의 랜덤 위치
-            Vector3 randomOffset = new Vector3(
-                Random.Range(-radius, radius),
-                0,
-                Random.Range(-radius, radius)
-            );
-
-            Vector3 candidatePosition = centerPosition + randomOffset;
-
-            // 플레이어와의 거리 체크
-            if (player != null)
-            {
-                float distanceToPlayer = Vector3.Distance(candidatePosition, player.position);
-
-                if (distanceToPlayer >= minDistanceFromPlayer && distanceToPlayer <= maxDistanceFromPlayer)
-                {
-                    return candidatePosition;
-                }
-            }
-            else
-            {
-                // 플레이어 참조가 없으면 그냥 반환
-                return candidatePosition;
-            }
-        }
-
-        return Vector3.zero; // 유효한 위치를 찾지 못함
+        return centerPosition + randomOffset;
     }
 
     IEnumerator ManageActiveEnemies()
     {
         while (isNight)
         {
-            // 비활성화된 적들을 리스트에서 제거
             activeEnemies.RemoveAll(enemy => enemy == null || !enemy.activeInHierarchy);
-
-            // 플레이어로부터 너무 멀어진 적들 제거
-            if (player != null)
-            {
-                for (int i = activeEnemies.Count - 1; i >= 0; i--)
-                {
-                    GameObject enemy = activeEnemies[i];
-                    if (enemy != null && enemy.activeInHierarchy)
-                    {
-                        float distance = Vector3.Distance(enemy.transform.position, player.position);
-                        if (distance > maxDistanceFromPlayer * 1.5f) // 조금 더 여유있게
-                        {
-                            ReturnEnemyToPool(enemy);
-                            activeEnemies.RemoveAt(i);
-                        }
-                    }
-                }
-            }
 
             yield return new WaitForSeconds(despawnCheckInterval);
         }
@@ -280,7 +227,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // 디버그용 기즈모 씬에서 스폰 범위 보여줌
     void OnDrawGizmosSelected()
     {
         foreach (SpawnZone zone in spawnZones)
@@ -299,16 +245,9 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (player != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(player.position, minDistanceFromPlayer);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(player.position, maxDistanceFromPlayer);
-        }
+        // 플레이어 거리 시각화 제거
     }
 
-    // 런타임에서 상태 확인용
     void OnGUI()
     {
         if (!Application.isPlaying) return;
