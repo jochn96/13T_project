@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     private bool isAttacking = false;
 
+    private bool hasBeenHit = false;
+
     private NavMeshAgent agent;
 
     void Start()
@@ -125,17 +127,15 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isDead)
+        if (isDead || hasBeenHit) return;
+
+        if (other.CompareTag("Sword") || other.CompareTag("Bullet")) // 둘 다 가능하게
         {
-            if (other.CompareTag("Bullet")) //화살은 파괴
-            {
+            hasBeenHit = true;
+            if (other.CompareTag("Bullet"))
                 Destroy(other.gameObject);
-                Die();
-            }
-            else if (other.CompareTag("Sword")) // 칼은 파괴방지
-            {
-                Die(); 
-            }
+
+            Die();
         }
     }
 

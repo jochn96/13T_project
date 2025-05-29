@@ -1805,6 +1805,63 @@ MonoBehaviour:
   maxValue: 500
   passiveValue: 20
   uiBar: {fileID: 871255280}
+--- !u!1001 &528438112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.776
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.661
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8854399
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.19897418
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4097872
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.092086524
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 25.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -49.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140556552006862054, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345901259045772436, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
+      propertyPath: m_Name
+      value: Equip_Sword2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65b7bf7e5408a7840826a3f7acebfa60, type: 3}
 --- !u!1 &528459499
 GameObject:
   m_ObjectHideFlags: 0
@@ -14943,3 +15000,4 @@ SceneRoots:
   - {fileID: 1796291179}
   - {fileID: 1599476141883225330}
   - {fileID: 1250889759}
+  - {fileID: 528438112}

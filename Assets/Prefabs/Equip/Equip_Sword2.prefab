@@ -106,7 +106,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.2939173, y: 2.1, z: 0.08148709}
-  m_Center: {x: 1.3877788e-15, y: 0.7, z: 0.000000069536014}
+  m_Center: {x: -0.4, y: 0.7, z: 0.000000069536014}
 --- !u!95 &700880196468956448
 Animator:
   serializedVersion: 5
@@ -149,3 +149,4 @@ MonoBehaviour:
   Item_ArrowPrefab: {fileID: 0}
   arrowSpawnPoint: {fileID: 0}
   arrowSpeed: 50
+  swordCollider: {fileID: 9121307699774804075}

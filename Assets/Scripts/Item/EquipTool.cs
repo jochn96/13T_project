@@ -24,6 +24,9 @@ public class EquipTool : Equip
     public Transform arrowSpawnPoint;            // 활에 붙은 화살 생성 위치
     public float arrowSpeed = 50f;               // 화살 속도
 
+    [Header("Combat Collider")]
+    public Collider swordCollider; // Sword 콜라이더 직접 참조
+
     private UIInventory inventory;
 
     private void Awake()
@@ -39,6 +42,9 @@ public class EquipTool : Equip
     {
         animator = GetComponent<Animator>();
         camera = Camera.main;
+
+        if (swordCollider != null)
+            swordCollider.enabled = false; // 기본 비활성화
     }
 
     public override void OnAttackInput()
@@ -58,6 +64,14 @@ public class EquipTool : Equip
 
     public void OnHit()
     {
+        // 공격 타이밍에만 콜라이더 활성화
+        if (swordCollider != null)
+        {
+            swordCollider.enabled = true;
+            Invoke(nameof(DisableSwordCollider), 0.2f); // 0.2초 후 비활성화
+        }
+
+        // 리소스 채집 Raycast 처리
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
@@ -73,5 +87,11 @@ public class EquipTool : Equip
         }
     }
 
-   
+    private void DisableSwordCollider()
+    {
+        if (swordCollider != null)
+            swordCollider.enabled = false;
+    }
+
+
 }
