@@ -19,6 +19,22 @@ public class EquipTool : Equip
     private Animator animator;
     private Camera camera;
 
+    [Header("Arrow")]
+    public GameObject Item_ArrowPrefab;          // 화살 프리팹 (Rigidbody 포함)
+    public Transform arrowSpawnPoint;            // 활에 붙은 화살 생성 위치
+    public float arrowSpeed = 50f;               // 화살 속도
+
+    private UIInventory inventory;
+
+    private void Awake()
+    {
+        GameObject root = GameObject.Find("UI"); // 또는 루트 오브젝트 이름
+        if (root != null)
+        {
+            inventory = root.GetComponentInChildren<UIInventory>(true);
+        }
+    }
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -28,11 +44,11 @@ public class EquipTool : Equip
     public override void OnAttackInput()
     {
         if (!attacking)
-            {
-                attacking = true;
-                animator.SetTrigger("Attack");
-                Invoke("OnCanAttack", attackRate);
-            }
+        {
+            attacking = true;
+            animator.SetTrigger("Attack");
+            Invoke("OnCanAttack", attackRate);
+        }
     }
 
     void OnCanAttack()
@@ -42,10 +58,10 @@ public class EquipTool : Equip
 
     public void OnHit()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, attackDistance))
+        if (Physics.Raycast(ray, out hit, attackDistance))
         {
             if (hit.collider.TryGetComponent(out Resource resource))
             {
@@ -56,4 +72,6 @@ public class EquipTool : Equip
             }
         }
     }
+
+   
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
+    public static UIInventory Instance { get; private set; }
+
     public ItemSlot[] slots;
 
     public GameObject inventoryWindow;
@@ -22,6 +24,16 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
+    [System.Serializable]
+    public class StartingItem
+    {
+        public ItemData itemData;
+        public int quantity = 1;
+    }
+
+    [Header("Starting Items")]
+    public StartingItem[] startingItems; // 시작 아이템 배열
+
     private PlayerController controller;
     private PlayerCondition condition;
 
@@ -32,6 +44,8 @@ public class UIInventory : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
+
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
@@ -50,6 +64,53 @@ public class UIInventory : MonoBehaviour
         }
 
         ClearSelctedItemWindow();
+
+        // 시작 아이템 추가
+        AddStartingItems();
+    }
+
+    private void AddStartingItems()
+    {
+        foreach (StartingItem startingItem in startingItems)
+        {
+            if (startingItem.itemData != null)
+            {
+                AddItemToInventory(startingItem.itemData, startingItem.quantity);
+            }
+        }
+    }
+
+    private void AddItemToInventory(ItemData data, int quantity)
+    {
+        int remainingQuantity = quantity;
+
+        // 중복 가능한 아이템인 경우 기존 스택에 추가
+        if (data.canStack)
+        {
+            for (int i = 0; i < slots.Length && remainingQuantity > 0; i++)
+            {
+                if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
+                {
+                    int addableAmount = Mathf.Min(remainingQuantity, data.maxStackAmount - slots[i].quantity);
+                    slots[i].quantity += addableAmount;
+                    remainingQuantity -= addableAmount;
+                }
+            }
+        }
+
+        // 빈 슬롯에 아이템 추가
+        for (int i = 0; i < slots.Length && remainingQuantity > 0; i++)
+        {
+            if (slots[i].item == null)
+            {
+                int addAmount = data.canStack ? Mathf.Min(remainingQuantity, data.maxStackAmount) : 1;
+                slots[i].item = data;
+                slots[i].quantity = addAmount;
+                remainingQuantity -= addAmount;
+            }
+        }
+
+        UpdateUI();
     }
 
     void ClearSelctedItemWindow()
@@ -198,6 +259,9 @@ public class UIInventory : MonoBehaviour
                     case ConsumableType.Hunger:
                         condition.Eat(selectedItem.consumables[i].value);
                         break;
+                    case ConsumableType.Arrow:
+                        Debug.Log("화살은 사용할 수 없습니다. 자동으로 소비됩니다.");
+                        return; // 화살은 사용하지 않고 자동 소비만
                 }
             }
             RemoveSelectedItem();
@@ -246,7 +310,7 @@ public class UIInventory : MonoBehaviour
         CharacterManager.Instance.Player.equip.UnEquip();
         UpdateUI();
 
-        if(selectedItemIndex == index)
+        if (selectedItemIndex == index)
         {
             SelectItem(selectedItemIndex);
         }
@@ -255,5 +319,63 @@ public class UIInventory : MonoBehaviour
     public void OnUnEquipBotton()
     {
         UnEquip(selectedItemIndex);
+    }
+
+    // 화살 소비 함수 (EquipBow에서 호출)
+    public bool ConsumeArrow(ItemData arrowItemData = null, int amount = 1)
+    {
+        // 인벤토리에서 화살 아이템 찾기 (Arrow 타입의 Consumable 아이템)
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                // Arrow 타입의 Consumable 아이템인지 확인
+                bool isArrowItem = (slots[i].item.type == ItemType.Consumable &&
+                                   slots[i].item.consumables != null &&
+                                   slots[i].item.consumables.Length > 0 &&
+                                   slots[i].item.consumables[0].type == ConsumableType.Arrow);
+
+                if (isArrowItem && slots[i].quantity >= amount)
+                {
+                    slots[i].quantity -= amount;
+
+                    // 수량이 0이 되면 슬롯을 비움
+                    if (slots[i].quantity <= 0)
+                    {
+                        slots[i].item = null;
+                        slots[i].quantity = 0;
+                    }
+
+                    UpdateUI();
+                    return true; // 소비 성공
+                }
+            }
+        }
+        return false; // 소비 실패 (화살이 없음)
+    }
+
+    // 화살 아이템 개수 확인
+    public int GetArrowCount(ItemData arrowItemData = null)
+    {
+        int totalCount = 0;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                // Arrow 타입의 Consumable 아이템인지 확인
+                bool isArrowItem = (slots[i].item.type == ItemType.Consumable &&
+                                   slots[i].item.consumables != null &&
+                                   slots[i].item.consumables.Length > 0 &&
+                                   slots[i].item.consumables[0].type == ConsumableType.Arrow);
+
+                if (isArrowItem)
+                {
+                    totalCount += slots[i].quantity;
+                }
+            }
+        }
+
+        return totalCount;
     }
 }

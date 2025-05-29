@@ -159,14 +159,14 @@ public class Enemy : MonoBehaviour
         currentState = newState;
     }
 
-    //private void OnTriggerEnter(Collider other) // 화살 맞았을떄 
-    //{
-    //    if (other.CompareTag("Bullet") && !isDead)
-    //    {
-    //        Destroy(other.gameObject);  // 화살 제거
-    //        Die();  //에너미 사망 처리
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other) // 화살 맞았을떄 
+    {
+        if (other.CompareTag("Bullet") && !isDead)
+        {
+            Destroy(other.gameObject);  // 화살 제거
+            Die();  //에너미 사망 처리
+        }
+    }
 
     public void Die()
     {
