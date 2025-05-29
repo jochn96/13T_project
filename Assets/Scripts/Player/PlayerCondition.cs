@@ -65,7 +65,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     //    {
     //        TakePhysiclaDamage(10); //임시 고정 대미지
     //    }
-    //}
+    //} */
 
     public void Heal(float amout)
     {
