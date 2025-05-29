@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.51826495, g: 0.6258267, b: 0.82815474, a: 1}
+  m_IndirectSpecularColor: {r: 0.5182646, g: 0.62582666, b: 0.82815355, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11062,6 +11062,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22694963-c823-4123-a43d-3d89bbdd2cd7
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 72b2d53f-52a4-4ac3-b441-9df434ce14b3
+    m_ActionName: Player/Talk[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -11788,7 +11792,7 @@ MonoBehaviour:
   jumpPower: 200
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   cameraContainer: {fileID: 8192360908385508772}
   minXLook: -85
   maxXLook: 85
