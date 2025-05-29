@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
 
     private bool hasBeenHit = false;
 
+    public bool IsDead => isDead;
+
     private NavMeshAgent agent;
 
     void Start()
@@ -206,6 +208,8 @@ public class Enemy : MonoBehaviour
             agent.isStopped = false;
             agent.speed = moveSpeed;
         }
+
+        hasBeenHit = false; // 새로 풀에서 나올 때 초기화
 
         ChangeState(State.Detect);
     }

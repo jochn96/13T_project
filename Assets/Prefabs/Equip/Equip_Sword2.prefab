@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9121307699774804075}
   - component: {fileID: 700880196468956448}
   - component: {fileID: 1282327322024130621}
+  - component: {fileID: -7098241943802089889}
   m_Layer: 8
   m_Name: Equip_Sword2
   m_TagString: Sword
@@ -105,8 +106,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2939173, y: 2.1, z: 0.08148709}
-  m_Center: {x: -0.4, y: 0.7, z: 0.000000069536014}
+  m_Size: {x: 0.1, y: 0.8, z: 0.06}
+  m_Center: {x: -0.31, y: 0.4, z: 0.45}
 --- !u!95 &700880196468956448
 Animator:
   serializedVersion: 5
@@ -150,3 +151,15 @@ MonoBehaviour:
   arrowSpawnPoint: {fileID: 0}
   arrowSpeed: 50
   swordCollider: {fileID: 9121307699774804075}
+--- !u!114 &-7098241943802089889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345901259045772436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ff67602644d174da4c7846184143b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
