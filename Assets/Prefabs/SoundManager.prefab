@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1157192838585852102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4595849890479016350}
+  - component: {fileID: 5333739820339680909}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4595849890479016350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157192838585852102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5333739820339680909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157192838585852102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05a8c9d5e90531479ef44f7a8b703e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSounds:
+  - name: BGM_day
+    clip: {fileID: 8300000, guid: d1de3344fa481ff4bb96a7ed2d3ae9d6, type: 3}
+  - name: BGM_night
+    clip: {fileID: 8300000, guid: e4ff980b961f9cf42989ab12ec66e0d6, type: 3}
+  sfxSounds:
+  - name: Player_jump
+    clip: {fileID: 8300000, guid: 75c9e73287eb4ac44821656dee18c5b5, type: 3}
+  - name: stone_gather
+    clip: {fileID: 8300000, guid: f82c54e7185b31f44ad47e1fcf5399b2, type: 3}
+  - name: wood_gather
+    clip: {fileID: 8300000, guid: fc59ebaa470040a4b809cf86bef8ccf0, type: 3}
+  - name: zombie_attack
+    clip: {fileID: 8300000, guid: 32e6e8d81086ec44abcadb8f3c036ff5, type: 3}
+  - name: arrow_sound
+    clip: {fileID: 8300000, guid: 7e57cd7956c807e4fb49beddeb4ea121, type: 3}
+  sfxChannelCount: 6

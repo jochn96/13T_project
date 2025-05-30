@@ -85,7 +85,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void Die()
     {
-        Time.timeScale = 0;
+        
         gameOverUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         if (gameOverButton != null)
@@ -111,19 +111,10 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void OnGameOverButton()
     {
-        Time.timeScale = 1f;                //버튼을 누르면 다시 시간흐르게
-        Heal(health.maxValue);
-        DrinkWater(water.maxValue);
-        DayNightCycle dayNightCycle = FindObjectOfType<DayNightCycle>();
-        if (dayNightCycle != null) { Debug.Log("NullDayNight"); }
-        if (dayNightCycle != null)
-        {
-            dayNightCycle.ResetTime();
-        }
-        Vector3 firstPosition = new Vector3(10, 3, 3);
-        this.transform.position = firstPosition;
+        
         Cursor.lockState = CursorLockMode.Locked;
         gameOverUI.SetActive(false);
-        //SceneManager.LoadScene("MainScene");
+        GameManager.Instance.RestartGame(); // 씬 다시 로드
+
     }
 }
