@@ -23,6 +23,7 @@ public class EnemyAttack : MonoBehaviour
         {
             hitCollider.enabled = true;
             hasHit = false;
+            
         }
     }
 
@@ -36,6 +37,7 @@ public class EnemyAttack : MonoBehaviour
             PlayerCondition condition = other.GetComponent<PlayerCondition>();
             if (condition != null)
             {
+                SoundManager.Instance.PlaySFX("zombie_attack");
                 condition.TakePhysiclaDamage(damage); // 공격피해 입히기
                 //Debug.Log("플레이어에게 피해 입힘: " + damage);
             }
