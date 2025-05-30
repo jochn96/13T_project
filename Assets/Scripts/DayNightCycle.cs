@@ -7,7 +7,7 @@ public class DayNightCycle : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float time;
     public float fullDayLenth;
-    public float startTime = 0.4f;
+    public float startTime = 0.2f;
     private float timeRate;
     public Vector3 noon; //Vector 90 0 0
 
@@ -25,6 +25,9 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
+    [Header("BGM")]
+    private bool isDayBGMPlaying = true; 
+    
     private void Start()
     {
         timeRate = 1.0f / fullDayLenth;
@@ -40,6 +43,24 @@ public class DayNightCycle : MonoBehaviour
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+
+        if (time >= 0.25f && time < 0.75f)// 0.25 > 정오, 0.75 > 자정 / 그렇기때문에 0.25~ 0.75를 낮이라고 판단
+        {
+            if (!isDayBGMPlaying)
+            {
+                SoundManager.Instance.PlayBGM("BGM_day");
+                isDayBGMPlaying = true;
+            }
+        }
+        else
+        {
+            if (isDayBGMPlaying)
+            {
+                SoundManager.Instance.PlayBGM("BGM_night");
+                isDayBGMPlaying = false;
+            }
+        }
+        
     }
 
     void UpdateLighting(Light lightSource, Gradient gradient, AnimationCurve intencityCurve)
