@@ -5,12 +5,7 @@ using UnityEngine.AI;
 
 public class BEnemy : Enemy
 {
-   
-
-    
-
-    
-    
+           
     private float attackTimer = 0f;
 
     [Header("오브젝트 설정")]
@@ -21,21 +16,43 @@ public class BEnemy : Enemy
     private bool isAttacking = false;
 
     [Header("Health Settings")]
-    public int maxHp = 20;
-    private int currentHp;
+    private int maxHp = 20;
+    public int currentHp;
 
     [Header("Death Effect Settings")]
     
     private SkinnedMeshRenderer tempSkinnedMeshRenderer;
     private Material originalMaterial;
     private Material redMaterial;
-
-    
-
+        
     private NavMeshAgent agent;
-          
 
-       
+    protected override void Start()
+    {
+        base.Start();
+        
+
+        // temp 자식 오브젝트의 SkinnedMeshRenderer 찾기
+        Transform tempTransform = transform.Find("temp");
+        if (tempTransform != null)
+        {
+            tempSkinnedMeshRenderer = tempTransform.GetComponent<SkinnedMeshRenderer>();
+            if (tempSkinnedMeshRenderer != null)
+            {
+                // 원본 메터리얼 저장
+                originalMaterial = tempSkinnedMeshRenderer.material;
+
+                // 빨간색 메터리얼 생성 (원본 메터리얼을 복사해서 사용)
+                redMaterial = new Material(originalMaterial);
+            }
+        }
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        currentHp = maxHp;
+    }
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -43,6 +60,7 @@ public class BEnemy : Enemy
 
         if (other.CompareTag("Sword") || other.CompareTag("Bullet"))
         {
+            Debug.Log("맞음@@@@@@@@@@@@@@");
             // 빨간색 반응 먼저 시작
             StartRedEffect();
 
@@ -57,10 +75,11 @@ public class BEnemy : Enemy
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        StartRedEffect();
+        
 
         if (currentHp <= 0)
         {
+            
             Die();
         }
     }

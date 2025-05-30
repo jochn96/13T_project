@@ -13,9 +13,8 @@ public class Core : MonoBehaviour
     public GameObject cam;
 
 
-    [Header("Health Settings")]
-    public int maxHp = 20;
-    private int currentHp;
+    [Header("Health Settings")]    
+    public int currentHp = 500;
 
     [Header("Death Effect Settings")]
 
@@ -25,12 +24,14 @@ public class Core : MonoBehaviour
 
     public float redEffectDuration = 1f; // 빨간색 효과 지속시간
                                          // temp 자식 오브젝트의 SkinnedMeshRenderer 참조
-  
+
+       
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("BEnemy"))
+        if (other.CompareTag("Core"))
             {
+            Debug.Log("뚱좀공격함@@@@@@@@@@@@");
             TakeDamage(10);
         }
         

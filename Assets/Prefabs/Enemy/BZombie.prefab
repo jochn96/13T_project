@@ -328,9 +328,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5707506916714634076}
+  - component: {fileID: 6317404888137124600}
+  - component: {fileID: 1976433966685551932}
   m_Layer: 0
   m_Name: AttackPivot
-  m_TagString: Untagged
+  m_TagString: Core
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,12 +346,47 @@ Transform:
   m_GameObject: {fileID: 969915735617293414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.035, y: 0.138, z: 0.038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2317535079731845635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6317404888137124600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969915735617293414}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.8, z: 0.3}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &1976433966685551932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969915735617293414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af3153342e9b5a4eb10d92fc62b686e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  hitCollider: {fileID: 6317404888137124600}
 --- !u!1 &1029362776888501008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,6 +1458,7 @@ GameObject:
   - component: {fileID: 8677099588527207942}
   - component: {fileID: 6987390040346106675}
   - component: {fileID: 7598706970447434094}
+  - component: {fileID: -8520772237056011870}
   m_Layer: 0
   m_Name: BZombie
   m_TagString: BEnemy
@@ -1478,17 +1516,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d546d1ecfa6ef46b852ba264709fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 0}
-  moveSpeed: 2
+  hitbox: {fileID: 1976433966685551932}
+  moveSpeed: 5
   rotationSpeed: 100
   animator: {fileID: 7240740615806039405}
   player: {fileID: 0}
-  detectDistance: 1
-  attackDistance: 1
+  detectDistance: 4
+  attackDistance: 4
   attackCooldown: 1
   poolName: wave3
   redEffectDuration: 1
-  maxHp: 20
+  currentHp: 0
 --- !u!54 &5121513636053087903
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1547,7 +1585,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1580,6 +1618,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8520772237056011870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071809750471080297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0f26ac404587c4d8e11a7cde72c8fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttack: {fileID: 1976433966685551932}
 --- !u!1 &6288813288122429307
 GameObject:
   m_ObjectHideFlags: 0
