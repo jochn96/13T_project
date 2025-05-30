@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         {
             attackTimer = 0f;
             animator.SetTrigger("IsAttack");
-            Debug.Log("공격!");
+            //Debug.Log("공격!");
             isAttacking = false;
         }
     }

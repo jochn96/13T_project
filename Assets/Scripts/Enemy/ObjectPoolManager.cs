@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PoolData
@@ -197,4 +198,18 @@ public class ObjectPoolManager : MonoBehaviour
         poolDictionary.Keys.CopyTo(poolNames, 0);
         return poolNames;
     }
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+
+        // DontDestroyOnLoad 된 적들을 수동 제거
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+
+        SceneManager.LoadScene("MainScene");
+    }
+
 }

@@ -111,13 +111,20 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         // 체력 회복 속도 설정
         healthRegenRate = rate;
     }
+    //public void OnGameOverButton()
+    //{
+    //    Heal(health.maxValue);
+    //    DrinkWater(water.maxValue);
+    //    Cursor.lockState = CursorLockMode.Locked;    //플레이어에 접근해 커서가 활성화 되게
+    //    gameOverUI.SetActive(false);         //창닫기
+    //    Time.timeScale = 1f;                //버튼을 누르면 다시 시간흐르게
+    //    SceneManager.LoadScene("MainScene");
+    //}
+
     public void OnGameOverButton()
     {
-        Heal(health.maxValue);
-        DrinkWater(water.maxValue);
-        Cursor.lockState = CursorLockMode.Locked;    //플레이어에 접근해 커서가 활성화 되게
-        gameOverUI.SetActive(false);         //창닫기
-        Time.timeScale = 1f;                //버튼을 누르면 다시 시간흐르게
-        SceneManager.LoadScene("MainScene");
+        Cursor.lockState = CursorLockMode.Locked;
+        gameOverUI.SetActive(false);
+        GameManager.Instance.RestartGame(); // 씬 다시 로드
     }
 }
