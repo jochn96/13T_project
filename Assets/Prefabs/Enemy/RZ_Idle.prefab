@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 5132620833970013518}
   - component: {fileID: 50903991680705484}
   - component: {fileID: 3978047479892298118}
+  - component: {fileID: 1988876185109071490}
   m_Layer: 0
   m_Name: RZ_Idle
   m_TagString: Enemy
@@ -561,11 +562,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533aa366be3b84241a0d1a2dfd023960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 0}
-  moveSpeed: 50
+  hitbox: {fileID: 6015357301645229572}
+  moveSpeed: 1
   rotationSpeed: 100
   animator: {fileID: 2074943007581156538}
-  player: {fileID: 0}
+  player: {fileID: 3842403464488670448}
   detectDistance: 5
   attackDistance: 2
   attackCooldown: 1
@@ -614,7 +615,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619229252896081708}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -629,7 +630,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -654,6 +655,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &1988876185109071490
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619229252896081708}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 100
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1810027768027824756
 GameObject:
   m_ObjectHideFlags: 0

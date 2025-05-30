@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Projectile
   - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX
