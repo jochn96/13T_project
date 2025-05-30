@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ÇÊ¿äÇÒ °æ¿ì À¯Áö
+            DontDestroyOnLoad(gameObject); // í•„ìš”í•  ê²½ìš° ìœ ì§€
         }
         else
         {
@@ -34,14 +34,14 @@ public class GameManager : MonoBehaviour
 
 
 
-        // Àá½Ã ´ë±â ÈÄ ¾À ·Îµå (Ç® ¹ÝÈ¯ ¿Ï·á ´ë±â)
+        // ìž ì‹œ ëŒ€ê¸° í›„ ì”¬ ë¡œë“œ (í’€ ë°˜í™˜ ì™„ë£Œ ëŒ€ê¸°)
         StartCoroutine(LoadSceneAfterDelay());
         SceneManager.LoadScene("MainScene");
         
     }
     IEnumerator LoadSceneAfterDelay()
     {
-        yield return new WaitForSeconds(0.1f); // Ç® ¹ÝÈ¯ ´ë±â
+        yield return new WaitForSeconds(0.1f); // í’€ ë°˜í™˜ ëŒ€ê¸°
         
         
     }
