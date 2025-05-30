@@ -14,7 +14,7 @@ public class NPCAreaController : MonoBehaviour
         
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit ( Collider other )
     {
         if (other.gameObject.CompareTag("Player"))
         {
