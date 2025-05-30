@@ -62,6 +62,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         //}
         if (health.curValue <= 0f)
         {
+            Debug.Log("2죽음@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Die();
         }
     }
@@ -87,6 +88,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void Die()
     {
+        Debug.Log("죽음@@@@@@@@@@@@@@@@@@@@@@@@@@");
         Time.timeScale = 0;
         gameOverUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
