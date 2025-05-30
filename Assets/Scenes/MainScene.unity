@@ -2327,8 +2327,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fc59ebaa470040a4b809cf86bef8ccf0, type: 3}
   - name: zombie_attack
     clip: {fileID: 8300000, guid: 32e6e8d81086ec44abcadb8f3c036ff5, type: 3}
-  - name: 
-    clip: {fileID: 8300000, guid: c0da229ce63dbec49809f37eead40b88, type: 3}
+  - name: arrow_sound
+    clip: {fileID: 8300000, guid: 7e57cd7956c807e4fb49beddeb4ea121, type: 3}
   sfxChannelCount: 6
 --- !u!4 &645004205
 Transform:
