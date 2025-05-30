@@ -1,6 +1,7 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,32 +10,39 @@ public class Enemy : MonoBehaviour
     public EnemyAttack hitbox;
 
     [Header("Enemy Settings")]
-    public float moveSpeed = 2f;  
+    public float moveSpeed = 2f;
     public float rotationSpeed = 100f;
     public Animator animator;
 
     [Header("Player Settings")]
     public Transform player;
-    public float detectDistance = 5f;   //ÇÃ·¹ÀÌ¾î °¨Áö¹üÀ§ ÇöÀç¾È¾²´ÂÁß
-    public float attackDistance = 2f;   //ÇÃ·¹ÀÌ¾î °ø°İ¹üÀ§
+    public float detectDistance = 5f;
+    public float attackDistance = 2f;
 
     [Header("Attack Settings")]
     public float attackCooldown = 1f;
     private float attackTimer = 0f;
 
-    [Header("¿ÀºêÁ§Æ® ¼³Á¤")]
-    public string poolName = "¿øÇÏ´Â ÀÌ¸§";
+    [Header("ì˜¤ë¸Œì íŠ¸ ì„¤ì •")]
+    public string poolName = "ì›í•˜ëŠ” ì´ë¦„";
 
     private State currentState = State.Detect;
     private bool isDead = false;
-
     private bool isAttacking = false;
-    private Vector3 targetDirection;
+
+    private bool hasBeenHit = false;
+
+    public bool IsDead => isDead;
+
+    private NavMeshAgent agent;
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+
         ChangeState(State.Detect);
-        isAttacking = false ;
+        isAttacking = false;
     }
 
     void Update()
@@ -57,29 +65,15 @@ public class Enemy : MonoBehaviour
 
     void Detect()
     {
-     
-        if(isAttacking) return;
-        
-        if (player == null) return;
+        if (isAttacking || player == null) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ÀÌµ¿
-        //MoveTowards(player.position);        
-        targetDirection = (player.position - transform.position).normalized;
-        targetDirection.y = 0;
+        agent.isStopped = false;
+        agent.SetDestination(player.position);  //nav meshë¡œ í”Œë ˆì´ì–´ ì¶”ì 
 
-        // ÀÌµ¿ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
-        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));  //¿¡³Ê¹Ì ½ºÇÇµå Á¶Àı
+        animator.SetFloat("Speed", agent.velocity.magnitude); // ì†ë„ì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜
 
-        // È¸Àü¸¸ ½ºÅ©¸³Æ®¿¡¼­ Ã³¸®
-        if (targetDirection != Vector3.zero)
-        {
-            Quaternion lookRot = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
-        }
-
-        // °ø°İ ¹üÀ§¿¡ µé¾î¿À¸é °ø°İ »óÅÂ·Î ÀüÈ¯
         if (distance <= attackDistance)
         {
             ChangeState(State.Attack);
@@ -97,7 +91,8 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î È¸Àü
+        // ì´ë™ ë©ˆì¶”ê³  íšŒì „
+        agent.isStopped = true;
         Vector3 dir = (player.position - transform.position).normalized;
         dir.y = 0;
         if (dir != Vector3.zero)
@@ -106,40 +101,13 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }
 
-        // ¸ØÃß±â 
-        // animator.SetFloat("Speed", 0f);
-
         if (attackTimer >= attackCooldown)
         {
             attackTimer = 0f;
             animator.SetTrigger("IsAttack");
-            Debug.Log("°ø°İ!");
+            Debug.Log("ê³µê²©!");
             isAttacking = false;
-
         }
-        //isAttacking= false;
-
-        
-    }
-
-    
-    
-
-    void MoveTowards(Vector3 target)
-    {
-        Vector3 dir = (target - transform.position).normalized;
-        dir.y = 0;
-
-        if (dir != Vector3.zero)
-        {
-            Quaternion lookRot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
-        }
-
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-
-        
-        
     }
 
     bool InRange(float range)
@@ -153,20 +121,25 @@ public class Enemy : MonoBehaviour
 
         if (newState == State.Attack)
         {
-            attackTimer = attackCooldown; // °ø°İ »óÅÂ·Î ÁøÀÔÇÏ¸é Áï½Ã °ø°İ °¡´É
+            attackTimer = attackCooldown;
         }
 
         currentState = newState;
     }
 
-    //private void OnTriggerEnter(Collider other) // È­»ì ¸Â¾ÒÀ»‹š 
-    //{
-    //    if (other.CompareTag("Bullet") && !isDead)
-    //    {
-    //        Destroy(other.gameObject);  // È­»ì Á¦°Å
-    //        Die();  //¿¡³Ê¹Ì »ç¸Á Ã³¸®
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isDead || hasBeenHit) return;
+
+        if (other.CompareTag("Sword") || other.CompareTag("Bullet")) // ë‘˜ ë‹¤ ê°€ëŠ¥í•˜ê²Œ
+        {
+            hasBeenHit = true;
+            if (other.CompareTag("Bullet"))
+                Destroy(other.gameObject);
+
+            Die();
+        }
+    }
 
     public void Die()
     {
@@ -174,13 +147,14 @@ public class Enemy : MonoBehaviour
         currentState = State.Die;
         animator.SetTrigger("IsDie");
 
-        // »ç¸Á ½Ã Äİ¶óÀÌ´õ Á¦°Å
+        if (agent != null)
+            agent.isStopped = true;
+
         foreach (Collider col in GetComponentsInChildren<Collider>())
         {
             col.enabled = false;
         }
 
-        // ¢º Rigidbody ºñÈ°¼ºÈ­
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -188,12 +162,10 @@ public class Enemy : MonoBehaviour
             rb.useGravity = false;
         }
 
-
-        // ¿ÀºêÁ§Æ® Ç®·Î ¹İÈ¯ (5ÃÊ ÈÄ)
         StartCoroutine(ReturnToPoolAfterDelay(5f));
     }
 
-    private System.Collections.IEnumerator ReturnToPoolAfterDelay(float delay)
+    private IEnumerator ReturnToPoolAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -203,7 +175,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // Ç®ÀÌ ¾øÀ¸¸é ±âÁ¸ ¹æ½ÄÀ¸·Î ÆÄ±«
             Destroy(gameObject);
         }
     }
@@ -222,7 +193,6 @@ public class Enemy : MonoBehaviour
             col.enabled = true;
         }
 
-        // ¢º Rigidbody È°¼ºÈ­
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -230,8 +200,16 @@ public class Enemy : MonoBehaviour
             rb.useGravity = true;
         }
 
-        // °È±â »óÅÂ·Î ¾Ö´Ï¸ŞÀÌ¼Ç ¼¼ÆÃ
-        animator.SetFloat("Speed", moveSpeed + Random.Range(-0.2f, 0.2f));
+        if (agent == null)
+            agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.speed = moveSpeed;
+        }
+
+        hasBeenHit = false; // ìƒˆë¡œ í’€ì—ì„œ ë‚˜ì˜¬ ë•Œ ì´ˆê¸°í™”
 
         ChangeState(State.Detect);
     }

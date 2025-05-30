@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
 
     void OnDayStart()
     {
-        Debug.Log("���� ���۵� - ��� ���� ����");
+        Debug.Log("낮이 시작됨 - 모든 몬스터 제거");
 
         if (spawnCoroutine != null)
         {
@@ -171,14 +171,14 @@ public class EnemySpawner : MonoBehaviour
                     enemyScript.player = player;
                 }
 
-              //  Debug.Log($"���Ͱ� {zone.zoneName}�� ������: {spawnPosition}");
+                //Debug.Log($"몬스터가 {zone.zoneName}에 스폰됨: {spawnPosition}");
             }
         }
     }
 
     Vector3 GetValidSpawnPosition(Vector3 centerPosition, float radius)
     {
-        // �ܼ� ���� ��ġ ��ȯ (�Ÿ� ���� ����)
+        // 단순 랜덤 위치 반환 (거리 제한 없음)
         Vector3 randomOffset = new Vector3(
             Random.Range(-radius, radius),
             0,
@@ -245,7 +245,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        // �÷��̾� �Ÿ� �ð�ȭ ����
+        // 플레이어 거리 시각화 제거
     }
 
     void OnGUI()
@@ -253,14 +253,14 @@ public class EnemySpawner : MonoBehaviour
         if (!Application.isPlaying) return;
 
         GUILayout.BeginArea(new Rect(10, 10, 300, 200));
-        GUILayout.Label($"���� �ð�: {dayNightCycle.time:F2}");
-        GUILayout.Label($"�� ����: {isNight}");
-        GUILayout.Label($"Ȱ�� ���� ��: {activeEnemies.Count}");
+        GUILayout.Label($"현재 시간: {dayNightCycle.time:F2}");
+        GUILayout.Label($"밤 여부: {isNight}");
+        GUILayout.Label($"활성 몬스터 수: {activeEnemies.Count}");
 
         if (ObjectPoolManager.Instance != null)
         {
-            GUILayout.Label($"Ǯ���� Ȱ��ȭ�� ��: {ObjectPoolManager.Instance.GetActiveCount(enemyPoolName)}");
-            GUILayout.Label($"Ǯ ��ü ũ��: {ObjectPoolManager.Instance.GetPoolSize(enemyPoolName)}");
+            GUILayout.Label($"풀에서 활성화된 적: {ObjectPoolManager.Instance.GetActiveCount(enemyPoolName)}");
+            GUILayout.Label($"풀 전체 크기: {ObjectPoolManager.Instance.GetPoolSize(enemyPoolName)}");
         }
 
         GUILayout.EndArea();

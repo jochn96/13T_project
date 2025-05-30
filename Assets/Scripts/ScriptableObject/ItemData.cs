@@ -7,14 +7,16 @@ public enum ItemType
 {
     Equipable,
     Consumable,
-    Resource
+    Resource,
+    Arrow
 }
 
 public enum ConsumableType
 {
     Health,
     Hunger,
-    Water
+    Water,
+    Arrow
 }
 [Serializable]
 public class ItemDataConsumable

@@ -1,48 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public float speed = 20f;
-    public float maxLifeTime = 5f;
-    private Rigidbody rb;
+    public float speed = 50f;
+    public int damage = 10;
 
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        rb.velocity = transform.forward * speed;
-        Invoke(nameof(ReturnToPool), maxLifeTime);
+        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        Destroy(gameObject, 5f); // í™”ì‚´ ì œê±°
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            // Àû Á×ÀÌ±â (Àû ½ºÅ©¸³Æ®¿¡ ¸Â´Â ÇÔ¼ö È£Ãâ)
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.Die();
-            }
-
-            // È­»ì ºñÈ°¼ºÈ­ ¶Ç´Â ÆÄ±«
-            ReturnToPool();
-        }
-        else if (other.CompareTag("Wall"))
-        {
-            // º®¿¡ ¸Â¾ÒÀ» ¶§ Ã³¸®
-            ReturnToPool();
-        }
-    }
-
-    void ReturnToPool()
-    {
-        // Ç®¸µ ¾²¸é ¹İÈ¯, ¾Æ´Ï¸é Destroy
-        gameObject.SetActive(false);
+        // ì  ë˜ëŠ” ì˜¤ë¸Œì íŠ¸ì— ë°ë¯¸ì§€ ì²˜ë¦¬
+        Destroy(gameObject);
     }
 }
