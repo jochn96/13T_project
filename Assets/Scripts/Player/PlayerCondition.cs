@@ -85,7 +85,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void Die()
     {
-        Time.timeScale = 0;
+        
         gameOverUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         if (gameOverButton != null)
@@ -111,8 +111,10 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void OnGameOverButton()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         gameOverUI.SetActive(false);
         GameManager.Instance.RestartGame(); // 씬 다시 로드
+
     }
 }

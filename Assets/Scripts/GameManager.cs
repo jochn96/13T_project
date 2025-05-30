@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     
     public void RestartGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainScene");
+        
+
         foreach (EnemySpawner spawner in enemySpawners)
         {
             if (spawner != null)
@@ -36,11 +36,14 @@ public class GameManager : MonoBehaviour
 
         // 잠시 대기 후 씬 로드 (풀 반환 완료 대기)
         StartCoroutine(LoadSceneAfterDelay());
+        SceneManager.LoadScene("MainScene");
+        
     }
     IEnumerator LoadSceneAfterDelay()
     {
         yield return new WaitForSeconds(0.1f); // 풀 반환 대기
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+        
     }
 
 }
