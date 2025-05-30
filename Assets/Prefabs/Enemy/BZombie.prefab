@@ -1423,7 +1423,7 @@ GameObject:
   - component: {fileID: 7598706970447434094}
   m_Layer: 0
   m_Name: BZombie
-  m_TagString: Enemy
+  m_TagString: BEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1488,17 +1488,7 @@ MonoBehaviour:
   attackCooldown: 1
   poolName: wave3
   redEffectDuration: 1
-  hitbox: {fileID: 0}
-  moveSpeed: 2
-  rotationSpeed: 100
-  animator: {fileID: 7240740615806039405}
-  player: {fileID: 0}
-  detectDistance: 1
-  attackDistance: 1
-  attackCooldown: 1
-  poolName: wave3
   maxHp: 20
-  redEffectDuration: 1
 --- !u!54 &5121513636053087903
 Rigidbody:
   m_ObjectHideFlags: 0

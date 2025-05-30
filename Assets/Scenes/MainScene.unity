@@ -5765,7 +5765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1408434071
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13220,11 +13220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8cc3a098630844ca8c5f42ac92f750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCondition: {fileID: 0}
-  red: {fileID: 0}
-  animator: {fileID: 0}
-  cam: {fileID: 0}
+  playerCondition: {fileID: 37218296781744745}
+  animator: {fileID: 3469287838330180633}
+  cam: {fileID: 46756823}
   maxHp: 30
+  redEffectDuration: 1
 --- !u!95 &3469287838330180633
 Animator:
   serializedVersion: 5
@@ -18353,17 +18353,7 @@ MonoBehaviour:
   attackCooldown: 1
   poolName: wave3
   redEffectDuration: 1
-  hitbox: {fileID: 0}
-  moveSpeed: 2
-  rotationSpeed: 100
-  animator: {fileID: 3770118250532719017}
-  player: {fileID: 8330723823769013003}
-  detectDistance: 1
-  attackDistance: 1
-  attackCooldown: 1
-  poolName: wave3
   maxHp: 20
-  redEffectDuration: 1
 --- !u!4 &8143486418451514807
 Transform:
   m_ObjectHideFlags: 0

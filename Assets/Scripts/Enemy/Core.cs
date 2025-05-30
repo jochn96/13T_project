@@ -1,12 +1,14 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Core : MonoBehaviour
 {
     public PlayerCondition playerCondition;
-    public BEnemy red;
+    
     public Animator animator;
     public GameObject cam;
 
@@ -14,6 +16,16 @@ public class Core : MonoBehaviour
     [Header("Health Settings")]
     public int maxHp = 20;
     private int currentHp;
+
+    [Header("Death Effect Settings")]
+
+    private SkinnedMeshRenderer tempSkinnedMeshRenderer;
+    private Material originalMaterial;
+    private Material redMaterial;
+
+    public float redEffectDuration = 1f; // 빨간색 효과 지속시간
+                                         // temp 자식 오브젝트의 SkinnedMeshRenderer 참조
+  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,11 +44,44 @@ public class Core : MonoBehaviour
         if (currentHp <= 0)
         {
             cam.SetActive(true);
-            red.StartRedEffect();
+            StartRedEffect();
             animator.SetTrigger("IsDie");
             playerCondition.Die(); 
             
         }
+    }
+
+
+    public void StartRedEffect()
+    {
+        if (tempSkinnedMeshRenderer != null)
+        {
+            StartCoroutine(RedEffect());
+        }
+    }
+
+    private IEnumerator RedEffect()
+    {
+        if (tempSkinnedMeshRenderer == null || redMaterial == null) yield break;
+
+        float elapsedTime = 0f;
+        Color originalColor = originalMaterial.color;
+        Color targetColor = Color.red;
+
+        while (elapsedTime < redEffectDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / redEffectDuration;
+
+            Color currentColor = Color.Lerp(originalColor, targetColor, progress);
+            redMaterial.color = currentColor;
+            tempSkinnedMeshRenderer.material = redMaterial;
+
+            yield return null;
+        }
+
+        redMaterial.color = targetColor;
+        tempSkinnedMeshRenderer.material = redMaterial;
     }
     //public void CoreDestory()
     //{
