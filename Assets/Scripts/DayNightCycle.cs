@@ -44,22 +44,22 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
 
-        if (time >= 0.25f && time < 0.75f)// 0.25 > 정오, 0.75 > 자정 / 그렇기때문에 0.25~ 0.75를 낮이라고 판단
-        {
-            if (!isDayBGMPlaying)
-            {
-                SoundManager.Instance.PlayBGM("BGM_day");
-                isDayBGMPlaying = true;
-            }
-        }
-        else
-        {
-            if (isDayBGMPlaying)
-            {
-                SoundManager.Instance.PlayBGM("BGM_night");
-                isDayBGMPlaying = false;
-            }
-        }
+        //if (time >= 0.25f && time < 0.75f)// 0.25 > 정오, 0.75 > 자정 / 그렇기때문에 0.25~ 0.75를 낮이라고 판단
+        //{
+        //    if (!isDayBGMPlaying)
+        //    {
+        //        SoundManager.Instance.PlayBGM("BGM_day");
+        //        isDayBGMPlaying = true;
+        //    }
+        //}
+        //else
+        //{
+        //    if (isDayBGMPlaying)
+        //    {
+        //        SoundManager.Instance.PlayBGM("BGM_night");
+        //        isDayBGMPlaying = false;
+        //    }
+        //}
         
     }
 
@@ -80,5 +80,10 @@ public class DayNightCycle : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    public void ResetTime()
+    {
+        time = startTime;
     }
 }
