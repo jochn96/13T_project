@@ -265,4 +265,61 @@ public class EnemySpawner : MonoBehaviour
 
         GUILayout.EndArea();
     }
+
+    /// <summary>
+    /// 게임 재시작 시 모든 적을 즉시 초기화 (외부 호출용)
+    /// </summary>
+    public void ClearAllEnemiesForRestart()
+    {
+        Debug.Log("게임 재시작: 모든 적 초기화 중...");
+
+        // 스폰 코루틴 정지
+        StopAllSpawnCoroutines();
+
+        // 모든 적을 즉시 풀로 반환 (Die() 애니메이션 없이)
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null && enemy.activeInHierarchy)
+            {
+                ReturnEnemyToPool(enemy);
+            }
+        }
+
+        activeEnemies.Clear();
+
+        // 상태 초기화
+        isNight = false;
+        wasNight = false;
+
+        Debug.Log($"적 초기화 완료. 총 {activeEnemies.Count}마리 제거됨");
+    }
+
+    /// <summary>
+    /// 모든 스폰 관련 코루틴을 정지
+    /// </summary>
+    public void StopAllSpawnCoroutines()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+
+        if (despawnCoroutine != null)
+        {
+            StopCoroutine(despawnCoroutine);
+            despawnCoroutine = null;
+        }
+
+        // 모니터링 코루틴도 정지
+        StopAllCoroutines();
+    }
+
+    /// <summary>
+    /// 컴포넌트가 파괴될 때 자동으로 모든 적 정리
+    /// </summary>
+    void OnDestroy()
+    {
+        ClearAllEnemiesForRestart();
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
-
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public interface IDamageIbe
 {
@@ -11,6 +12,9 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 {
     public UICondition uICondition;
     public float healthRegenRate = 1f; //추가한 변수 
+    public GameObject gameOverUI;
+    public Button gameOverButton;
+    public PlayerController playerController;
 
     Condition health { get { return uICondition.health; } }
     Condition hunger { get { return uICondition.hunger; } }
@@ -18,9 +22,20 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
 
     public float noHungerHealthDecay;
 
+<<<<<<< HEAD
     //public void RestoreFromItem(ItemData item)
     //{
     //    if (item.type != ItemType.Consumable || item.consumables.Length == 0) return;
+=======
+    private void Start()
+    {
+        gameOverUI.SetActive(false);
+    }
+
+    public void RestoreFromItem(ItemData item)
+    {
+        if (item.type != ItemType.Consumable) return;
+>>>>>>> Final_dev
 
     //    var effect = item.consumables[0]; //단일회복효과, 체력이면 체력, 허기면 허기, 수분이면 수분 회복
     //    {
@@ -40,8 +55,9 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     //}
     
     public event Action onTakeDamage;
-    /*private void Update()
+    private void Update()
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (IsPlayerMoving())
         {
@@ -52,18 +68,20 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         //hunger.Subject(hunger.passiveValue * Time.deltaTime);
         //water.Subject(water.passiveValue * Time.deltaTime);
 >>>>>>> dev
+=======
+        hunger.Subject(hunger.passiveValue * Time.deltaTime);
+        water.Subject(water.passiveValue * Time.deltaTime);
+>>>>>>> Final_dev
 
- 
-
-        //if(hunger.curValue < 0f)
+        //if (hunger.curValue < 0f)
         //{
         //    health.Subject(noHungerHealthDecay * Time.deltaTime);
         //}
-        //if(health.curValue < 0f)
-        //{
-        //    Die();
-        //}
-    } */ 
+        if (health.curValue <= 0f)
+        {
+            Die();
+        }
+    }
 
 <<<<<<< HEAD
     private bool IsPlayerMoving()
@@ -94,7 +112,11 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     }
     public void Die()
     {
-        Debug.Log("die");
+        
+        gameOverUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        if (gameOverButton != null)
+            gameOverButton.onClick.AddListener(OnGameOverButton);
     }
 
     public void TakePhysiclaDamage(int damage)
@@ -114,5 +136,12 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         // 체력 회복 속도 설정
         healthRegenRate = rate;
     }
+    public void OnGameOverButton()
+    {
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        gameOverUI.SetActive(false);
+        GameManager.Instance.RestartGame(); // 씬 다시 로드
 
+    }
 }
