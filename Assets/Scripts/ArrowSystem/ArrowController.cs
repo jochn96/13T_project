@@ -71,6 +71,7 @@ public class ArrowController : MonoBehaviour
         {
             flightTimer += Time.deltaTime;
 
+            SoundManager.Instance.PlaySFX("arrow_sound");
             // 포물선을 따라 화살 이동 (더 평평한 궤도로 수정)
             float adjustedHeight = (targetDistance / 10f) * heightMultiplier; // 기존 5f에서 10f로 변경하여 높이 절반으로 감소
             transform.position = MathParabola.Parabola(startPoint, target, adjustedHeight, flightTimer * speedToDistance);
