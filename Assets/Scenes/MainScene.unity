@@ -2503,10 +2503,10 @@ Light:
   m_GameObject: {fileID: 655915813}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 1
+  m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.7075472, g: 0.6289611, b: 0.23028658, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.39759132, b: 0.3915094, a: 1}
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 17
   m_InnerSpotAngle: 7
@@ -4742,7 +4742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7522319701415691382, guid: 263e6e3ba7624ff4489a941d1304005e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5509,7 +5509,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408434070}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bba855ba53fdf4c4a9c9f7af4a1d46c6, type: 3}
   m_Name: 
@@ -11172,7 +11172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6845342054076681243, guid: 0deb629124bb2bc4889176c11d5368f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8618492606442562305, guid: 0deb629124bb2bc4889176c11d5368f0, type: 3}
       propertyPath: player
