@@ -25,6 +25,8 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     private void Start()
     {
         gameOverUI.SetActive(false);
+        if (gameOverButton != null)
+            gameOverButton.onClick.AddListener(OnGameOverButton);
     }
 
     public void RestoreFromItem(ItemData item)
@@ -88,8 +90,7 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         
         gameOverUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
-        if (gameOverButton != null)
-            gameOverButton.onClick.AddListener(OnGameOverButton);
+        
     }
 
     public void TakePhysiclaDamage(int damage)
