@@ -11170,10 +11170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BEnemySpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 6845342054076681243, guid: 0deb629124bb2bc4889176c11d5368f0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8618492606442562305, guid: 0deb629124bb2bc4889176c11d5368f0, type: 3}
       propertyPath: player
       value: 
