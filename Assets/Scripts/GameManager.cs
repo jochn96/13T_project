@@ -52,5 +52,25 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            DayNightCycle dayNightCycle = FindObjectOfType<DayNightCycle>();
+            if (dayNightCycle != null)
+            {
+                dayNightCycle.ForceUpdateLighting(); // 메인씬 로드 시 강제로 조명 갱신
+            }
+        }
+    }
 }

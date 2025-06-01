@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class DayNightCycle : MonoBehaviour
 {
     [Range(0.0f, 1.0f)]
@@ -86,4 +86,15 @@ public class DayNightCycle : MonoBehaviour
     {
         time = startTime;
     }
+
+    public void ForceUpdateLighting() //씬전환후 강제 초기화 메서드
+    {
+        UpdateLighting(sun, sunColor, sunIntensity);
+        UpdateLighting(moon, moonColor, moonIntensity);
+
+        RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
+        RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+    }
+
+
 }
