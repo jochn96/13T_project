@@ -66,11 +66,17 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == "MainScene")
         {
-            DayNightCycle dayNightCycle = FindObjectOfType<DayNightCycle>();
-            if (dayNightCycle != null)
-            {
-                dayNightCycle.ForceUpdateLighting(); // 메인씬 로드 시 강제로 조명 갱신
-            }
+            StartCoroutine(UpdateLightingNextFrame());
+        }
+    }
+
+    private IEnumerator UpdateLightingNextFrame()
+    {
+        yield return null; // 한 프레임 기다림
+        DayNightCycle dayNightCycle = FindObjectOfType<DayNightCycle>();
+        if (dayNightCycle != null)
+        {
+            dayNightCycle.ForceUpdateLighting();
         }
     }
 }
