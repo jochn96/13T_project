@@ -45,5 +45,12 @@ public class GameManager : MonoBehaviour
         
         
     }
+   
+    // 게임 처음 시작 (타이틀에서 호출)
+    public void StartGame()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
 
 }
