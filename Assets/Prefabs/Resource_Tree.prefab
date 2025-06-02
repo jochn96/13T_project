@@ -151,8 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce5b6b322a7f6a4cb223baccd6a1c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGive: {fileID: 11400000, guid: b3cf2bba8c4020a439faebc8bd41935c, type: 2}
-  quiiantityPerHit: 1
-  capacy: 5
-  spawnAreas: []
-  resourcePrefabs: []
+  type: 0
+  amountPerHit: 1
+  capacity: 0
