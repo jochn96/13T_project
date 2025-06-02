@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
@@ -7,11 +7,11 @@ public class TitleUI : MonoBehaviour
 {
     public void OnClickStartGame()
     {
-        SceneManager.LoadScene("MainScene"); //¸ŞÀÎ¾À ·Îµå
+        SceneManager.LoadScene("MainScene"); //ë©”ì¸ì”¬ ë¡œë“œ
     }
 
     public void ExitGame()
     {
-        EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }

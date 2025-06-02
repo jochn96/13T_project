@@ -206,8 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPoolName: wave1
   dayNightCycle: {fileID: 0}
-  nightStartTime: 0.31
-  nightEndTime: 0.3
+  nightStartTime: 0.75
+  nightEndTime: 0.25
   spawnZones:
   - zoneName: west
     spawnPoints:
