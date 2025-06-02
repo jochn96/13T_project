@@ -1,7 +1,7 @@
-using JetBrains.Annotations;
+ï»¿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
+//using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,8 +22,8 @@ public class Core : MonoBehaviour
     private Material originalMaterial;
     private Material redMaterial;
 
-    public float redEffectDuration = 1f; // »¡°£»ö È¿°ú Áö¼Ó½Ã°£
-                                         // temp ÀÚ½Ä ¿ÀºêÁ§Æ®ÀÇ SkinnedMeshRenderer ÂüÁ¶
+    public float redEffectDuration = 1f; // ë¹¨ê°„ìƒ‰ íš¨ê³¼ ì§€ì†ì‹œê°„
+                                         // temp ìì‹ ì˜¤ë¸Œì íŠ¸ì˜ SkinnedMeshRenderer ì°¸ì¡°
 
        
 
@@ -31,7 +31,7 @@ public class Core : MonoBehaviour
     {
         if (other.CompareTag("Core"))
             {
-            Debug.Log("¶×Á»°ø°İÇÔ@@@@@@@@@@@@");
+            Debug.Log("ëš±ì¢€ê³µê²©í•¨@@@@@@@@@@@@");
             TakeDamage(10);
         }
         
