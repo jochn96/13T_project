@@ -96,14 +96,14 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
     }
 
-    void RotateLights()
-    {
-        // 하루를 360도로 가정하고, 시간에 따라 회전
-        float sunAngle = (time - 0.25f) * 360f;
-        float moonAngle = (time - 0.75f) * 360f;
+    //void RotateLights()  // 하루를 360도로 가정하고, 시간에 따라 회전
+    //{
+    //    // 하루를 360도로 가정하고, 시간에 따라 회전
+    //    float sunAngle = (time - 0.25f) * 360f;
+    //    float moonAngle = (time - 0.75f) * 360f;
 
-        sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
-        moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
-    }
+    //    sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
+    //    moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
+    //}
 
 }
