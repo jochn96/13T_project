@@ -2664,9 +2664,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.39759132, b: 0.3915094, a: 1}
-  m_Intensity: 2
-  m_Range: 10
+  m_Color: {r: 0.9716981, g: 0.047254197, b: 0.041251317, a: 1}
+  m_Intensity: 1
+  m_Range: 65
   m_SpotAngle: 17
   m_InnerSpotAngle: 7
   m_CookieSize: 10
@@ -12349,7 +12349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6412913777341338665, guid: bf5e022eea97cea4ca71bea2ac7ea26e, type: 3}
       propertyPath: currentHp
-      value: 400
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6412913777341338665, guid: bf5e022eea97cea4ca71bea2ac7ea26e, type: 3}
       propertyPath: playerCondition
@@ -13757,6 +13757,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2844829414736279862, guid: f40d890f764365d41867d879548cc50c, type: 3}
+      propertyPath: m_Intensity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844829414736279862, guid: f40d890f764365d41867d879548cc50c, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4218597659793824460, guid: f40d890f764365d41867d879548cc50c, type: 3}
       propertyPath: fullDayLenth
       value: 90
