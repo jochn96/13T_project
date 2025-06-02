@@ -15,6 +15,8 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     public GameObject gameOverUI;
     public Button gameOverButton;
     public PlayerController playerController;
+    public Player player;
+    
 
     Condition health { get { return uICondition.health; } }
     Condition hunger { get { return uICondition.hunger; } }
@@ -30,6 +32,8 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     private void Start()
     {
         gameOverUI.SetActive(false);
+        if (gameOverButton != null)
+            gameOverButton.onClick.AddListener(OnGameOverButton);
     }
 
     public void RestoreFromItem(ItemData item)
@@ -114,9 +118,9 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
     {
         
         gameOverUI.SetActive(true);
+        player.controller.enabled = false;
         Cursor.lockState = CursorLockMode.None;
-        if (gameOverButton != null)
-            gameOverButton.onClick.AddListener(OnGameOverButton);
+        
     }
 
     public void TakePhysiclaDamage(int damage)

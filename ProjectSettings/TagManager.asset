@@ -9,6 +9,8 @@ TagManager:
   - Projectile
   - Enemy
   - Sword
+  - Core
+  - BEnemy
   layers:
   - Default
   - TransparentFX

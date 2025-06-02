@@ -45,5 +45,38 @@ public class GameManager : MonoBehaviour
         
         
     }
+   
+    // 게임 처음 시작 (타이틀에서 호출)
+    public void StartGame()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            StartCoroutine(UpdateLightingNextFrame());
+        }
+    }
+
+    private IEnumerator UpdateLightingNextFrame()
+    {
+        yield return null; // 한 프레임 기다림
+        DayNightCycle dayNightCycle = FindObjectOfType<DayNightCycle>();
+        if (dayNightCycle != null)
+        {
+            dayNightCycle.ForceUpdateLighting();
+        }
+    }
 }

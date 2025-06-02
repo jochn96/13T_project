@@ -39,7 +39,7 @@ public class EnemyAttack : MonoBehaviour
             {
                 SoundManager.Instance.PlaySFX("zombie_attack");
                 condition.TakePhysiclaDamage(damage); // 공격피해 입히기
-                Debug.Log("플레이어에게 피해 입힘: " + damage);
+                //Debug.Log("플레이어에게 피해 입힘: " + damage);
             }
 
             hasHit = true;
